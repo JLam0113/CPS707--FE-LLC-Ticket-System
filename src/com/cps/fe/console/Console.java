@@ -28,10 +28,20 @@ public class Console {
 		String next = sc.nextLine();
 		while(!next.equals("logout")){
 			if(next.equals("addcredit")) {
-				
+				System.out.println("Please enter username:");
+				String username2 = sc.nextLine();
+				System.out.println("Please enter amount of credit:");
+				int credit = sc.nextInt();
+				user1.addCredit(username2, credit);
+				System.out.println("Transaction successful, please enter a command.");
 			}
 			if(next.equals("create")) {
-				
+				System.out.println("Create account selected, pelase enter the username:");
+				String username2 = sc.nextLine();
+				System.out.println("Please enter the account type:");
+				String type = sc.nextLine();
+				user1.createAccount(username2, type);
+				System.out.println("Transaction successful, please enter a command.");
 			}
 			if(next.equals("buy")) {
 				
