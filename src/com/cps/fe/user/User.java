@@ -1,15 +1,13 @@
 package com.cps.fe.user;
 
-import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-
-import com.cps.fe.console.Console;
 
 public class User {
 	String username;
@@ -103,8 +101,8 @@ public class User {
 					if(temp2[0].equals(username))
 					{
 						//An account with this name already exists
-						System.out.println("Invalid username (username already taken). Session ended.");
-						System.exit(0);
+						System.out.println("Invalid username (username already taken). Please enter a command.");
+						return;
 					}
 				}
 				sc.close();
@@ -115,6 +113,8 @@ public class User {
 					fr = new FileWriter(file,true);
 					fr.write("\n" + username + " " + type + " 0.00");
 					fr.close();
+					this.writeToDTF("01" + username + " " + type + " 0.00\n");
+					System.out.println("Transaction successful, please enter a command.");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -146,6 +146,41 @@ public class User {
 		}
 		else 
 			System.out.println("Transaction cancelled (user is invalid), please enter a command");
+	}
+	
+	public void writeToDTF(String msg) {
+		try 
+		{
+			LocalDate localDate = LocalDate.now();
+			String date = new String("resources/" + localDate + ".dtf");
+			java.net.URL url = User.class.getClassLoader().getResource(date);
+			URL url2 = User.class.getClassLoader().getResource("resources/");
+			
+			if(url == null) {
+				File temp = new File(url2.getPath(), localDate + ".dtf");
+				temp.createNewFile();
+				url = User.class.getClassLoader().getResource(date);
+			}
+			File file = new File(url.getPath());			
+
+			FileWriter fr;
+			try {
+				fr = new FileWriter(file,true);
+				fr.write(msg);
+				fr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		catch (FileNotFoundException e) 
+		{
+			 System.out.println(e);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 }

@@ -1,5 +1,11 @@
 package com.cps.fe.console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.cps.fe.user.User;
@@ -33,7 +39,6 @@ public class Console {
 				System.out.println("Please enter amount of credit:");
 				int credit = sc.nextInt();
 				user1.addCredit(username2, credit);
-				System.out.println("Transaction successful, please enter a command.");
 			}
 			if(next.equals("create")) {
 				System.out.println("Create account selected, pelase enter the username:");
@@ -41,7 +46,6 @@ public class Console {
 				System.out.println("Please enter the account type:");
 				String type = sc.nextLine();
 				user1.createAccount(username2, type);
-				System.out.println("Transaction successful, please enter a command.");
 			}
 			if(next.equals("buy")) {
 				
@@ -54,9 +58,45 @@ public class Console {
 			}
 			next = sc.nextLine();
 		}
+		writeToDTF("00 000000 0.00");
 		System.out.println("Session ended");
 		System.exit(0);
 		
+	}
+	
+	public static void writeToDTF(String msg) {
+		try 
+		{
+			LocalDate localDate = LocalDate.now();
+			String date = new String("resources/" + localDate + ".dtf");
+			java.net.URL url = User.class.getClassLoader().getResource(date);
+			URL url2 = User.class.getClassLoader().getResource("resources/");
+			
+			if(url == null) {
+				File temp = new File(url2.getPath(), localDate + ".dtf");
+				temp.createNewFile();
+				url = User.class.getClassLoader().getResource(date);
+			}
+			File file = new File(url.getPath());			
+
+			FileWriter fr;
+			try {
+				fr = new FileWriter(file,true);
+				fr.write(msg);
+				fr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		catch (FileNotFoundException e) 
+		{
+			 System.out.println(e);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 }
