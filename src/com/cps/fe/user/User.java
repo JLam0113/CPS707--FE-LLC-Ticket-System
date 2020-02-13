@@ -156,8 +156,7 @@ public class User {
 					fr = new FileWriter(file,true);
 					fr.write("\n" + username + " " + type + " 0.00");
 					fr.close();
-					this.writeToDTF("01" + username + " " + type + " 0.00\n");
-					System.out.println("Transaction successful, please enter a command.");
+					this.writeToDTF("01 " + username + " " + type + " 0.00\n");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -209,7 +208,8 @@ public class User {
 				{
 					//Update the users credit
 					User user2 = new User(user);
-					user2.updateCredit(credit);	
+					user2.updateCredit(credit);
+					this.writeToDTF("02 " + user2.username + " " + user2.userType + " " + credit + ".00\n");
 				}
 			}
 			catch (FileNotFoundException e) 
@@ -223,6 +223,7 @@ public class User {
 				System.out.println("Transaction cancelled (user is invalid), please enter a command");
 			else
 				user2.updateCredit(credit);
+			this.writeToDTF("02 " + user2.username + " " + user2.userType + " " + credit + ".00\n");
 		}
 		else 
 			System.out.println("Transaction cancelled (user is invalid), please enter a command");
@@ -254,7 +255,7 @@ public class User {
 			}
 			
 		}
-		catch (FileNotFoundException e) 
+		catch (FileNotFoundException e)
 		{
 			 System.out.println(e);
 		} catch (IOException e) {
