@@ -28,10 +28,12 @@ public class User {
 		while (sc.hasNextLine()) {
 			String temp = sc.nextLine();
 			String[] temp2 = temp.split(" ");
-			if(temp2[0].equals(this.username))
+			if(temp2[0].equals(this.username)) {
 				this.userType = temp2[1];
+			//if(Double.parseDouble(temp2[2]) != 0.00)
 				this.credit = (int) Double.parseDouble(temp2[2]);
 			}
+		}
 		sc.close();
 		}
 		 catch (FileNotFoundException e) {
@@ -126,6 +128,63 @@ public class User {
 				}
 	}
 	
+	public void delete() {
+		try {
+			
+			//Get the local path for accounts.txt
+			java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+			java.net.URL url2 = User.class.getClassLoader().getResource("resources/temp.txt");
+				
+			File file = new File(url.getPath());
+			File file2 = new File(url2.getPath());
+			
+			Scanner sc = new Scanner(file);
+			FileWriter fr;
+			try {
+				fr = new FileWriter(file2,true);
+				while (sc.hasNextLine()) {
+					String temp = sc.nextLine();
+					String[] temp2 = temp.split(" ");
+					if(temp2[0].equals(this.username))
+						fr.write("");
+					else
+						fr.write(temp + "\n");
+				}
+				// Rename file
+				PrintWriter pw = new PrintWriter(file);
+				pw.print("");
+				pw.close();
+				fr.close();
+				sc.close();
+				sc = new Scanner(file2);
+				fr = new FileWriter(file,true);
+				while (sc.hasNextLine()) {
+					String temp = sc.nextLine();
+					String[] temp2 = temp.split(" ");
+					if(temp2[0].equals(this.username))
+					{
+						//Write to file with new credit value
+						fr.write("");
+					}
+					else
+						fr.write(temp + "\n");
+				}
+		
+				pw = new PrintWriter(file2);
+				pw.print("");
+				pw.close();
+				fr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			sc.close();
+			}
+			 catch (FileNotFoundException e) {
+				 System.out.println(e);
+				}
+	}
+	
 	public void createAccount(String username, String type){
 		if (this.userType.equals("AA")) {
 			try 
@@ -156,7 +215,7 @@ public class User {
 					fr = new FileWriter(file,true);
 					fr.write("\n" + username + " " + type + " 0.00");
 					fr.close();
-					this.writeToDTF("01" + username + " " + type + " 0.00\n");
+					this.writeToDTF("01 " + username + " " + type + " 0.00\n");
 					System.out.println("Transaction successful, please enter a command.");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -210,6 +269,8 @@ public class User {
 					//Update the users credit
 					User user2 = new User(user);
 					user2.updateCredit(credit);	
+					this.writeToDTF("06 " + user2.username + " " + credit + " \n");
+					System.out.println("Transaction successful, please enter a command.");
 				}
 			}
 			catch (FileNotFoundException e) 
@@ -221,8 +282,60 @@ public class User {
 			User user2 = new User(user);
 			if(user2.userType.equals("AA"))
 				System.out.println("Transaction cancelled (user is invalid), please enter a command");
-			else
+			else {
 				user2.updateCredit(credit);
+				this.writeToDTF("06 " + user2.username + " " + credit + " \n");
+				System.out.println("Transaction successful, please enter a command.");
+			}
+		}
+		else 
+			System.out.println("Transaction cancelled (user is invalid), please enter a command");
+	}
+	
+	public void deleteAccount(String user) {
+		if (this.userType.equals("AA")) {
+			try 
+			{
+				//TODO: Check if entered username exists in accounts.txt
+				//Get the local path for accounts.txt
+				java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+					
+				File file = new File(url.getPath());
+				Scanner sc = new Scanner(file);
+				boolean userExists = false;
+				
+				while (sc.hasNextLine()) 
+				{
+					String temp = sc.nextLine();
+					String[] temp2 = temp.split(" ");
+					if(temp2[0].equals(user))
+					{
+						//user exists within system
+						userExists = true;
+					}
+				}
+				sc.close();
+				
+				if(!userExists)
+				{
+					//An account with this name does not exist in account.txt
+					System.out.println("Invalid username (user does not exist). Session ended.");
+					System.exit(0);
+				}
+				else
+				{
+					//Update the users credit
+					User user2 = new User(user);
+					user2.delete();
+					this.writeToDTF("02 " + user2.username + " " + user2.userType + " " + user2.credit + " \n");
+					System.out.println("Transaction successful, please enter a command.");
+					clean();
+				}
+			}
+			catch (FileNotFoundException e) 
+			{
+				 System.out.println(e);
+			}	
 		}
 		else 
 			System.out.println("Transaction cancelled (user is invalid), please enter a command");
@@ -263,4 +376,57 @@ public class User {
 		}	
 	}
 
+	public void clean() {
+		try {
+			
+			//Get the local path for accounts.txt
+			java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+			java.net.URL url2 = User.class.getClassLoader().getResource("resources/temp.txt");
+				
+			File file = new File(url.getPath());
+			File file2 = new File(url2.getPath());
+			
+			Scanner sc = new Scanner(file);
+			FileWriter fr;
+			try {
+				fr = new FileWriter(file2,true);
+				while (sc.hasNextLine()) {
+					String temp = sc.nextLine();
+					String[] temp2 = temp.split(" ");
+					if(temp2[0].equals("\n"))
+						fr.write("");
+					else
+						fr.write(temp + "\n");
+				}
+				// Rename file
+				PrintWriter pw = new PrintWriter(file);
+				pw.print("");
+				pw.close();
+				fr.close();
+				sc.close();
+				sc = new Scanner(file2);
+				fr = new FileWriter(file,true);
+				while (sc.hasNextLine()) {
+					String temp = sc.nextLine();
+					String[] temp2 = temp.split(" ");
+					if(temp2[0].equals("\n"))
+						fr.write("");
+					else
+						fr.write(temp + "\n");
+				}
+		
+				pw = new PrintWriter(file2);
+				pw.print("");
+				pw.close();
+				fr.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			sc.close();
+			}
+			 catch (FileNotFoundException e) {
+				 System.out.println(e);
+		}
+	}
 }

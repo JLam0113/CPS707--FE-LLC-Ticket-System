@@ -47,6 +47,11 @@ public class Console {
 				String type = sc.nextLine();
 				user1.createAccount(username2, type);
 			}
+			if(next.equals("delete")) {
+				System.out.println("Delete account selected, pelase enter the username:");
+				String username2 = sc.nextLine();
+				user1.deleteAccount(username2);
+			}
 			if(next.equals("buy")) {
 				
 			}
@@ -58,7 +63,7 @@ public class Console {
 			}
 			next = sc.nextLine();
 		}
-		writeToDTF("00 000000 0.00");
+		writeToDTF("00 000000 0.00\n");
 		System.out.println("Session ended");
 		System.exit(0);
 		
