@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -17,6 +16,43 @@ public class User {
 
 
 	public User(String username) {
+		this.username = username;
+		try {
+		
+		//Get the local path for accounts.txt
+		java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+			
+		File file = new File(url.getPath());
+		Scanner sc = new Scanner(file);
+		while (sc.hasNextLine()) {
+			String temp = sc.nextLine();
+			String[] temp2 = temp.split(" ");
+			if(temp2[0].equals(this.username)) {
+				this.userType = temp2[1];
+			//if(Double.parseDouble(temp2[2]) != 0.00)
+				this.credit = (int) Double.parseDouble(temp2[2]);
+			}
+		}
+		sc.close();
+		}
+		 catch (FileNotFoundException e) {
+			 System.out.println(e);
+			}
+	}
+	
+	public String getUser() {
+		return this.username;
+	}
+	
+	public String getUserType() {
+		return this.userType;
+	}
+	
+	public int getCredit() {
+		return this.credit;
+	}
+	
+	public void setUser(String username) {
 		this.username = username;
 		try {
 		
@@ -186,6 +222,10 @@ public class User {
 	}
 	
 	public void createAccount(String username, String type){
+		if (username.length() >= 16) {
+			System.out.println("Username is too long (max 15), please enter a command");
+			return;
+		}
 		if (this.userType.equals("AA")) {
 			try 
 			{

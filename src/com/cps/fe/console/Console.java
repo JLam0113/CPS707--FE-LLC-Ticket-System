@@ -13,42 +13,36 @@ import com.cps.fe.user.User;
 public class Console {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome, please enter a command.");
-		String command = sc.nextLine();
-		if (command.equals("login")) {
-			System.out.println("Please enter your username");
+		while(true) {
+		User user1 = login(sc);
+		postLogin(user1, sc);
+		logout(user1);
 		}
-		else {
-			System.out.println("Invalid command (must be logged in first). Session ended.");
-			System.exit(0);
-		}
-		String username = sc.nextLine();
-		User user1 = new User(username);
-		if (!user1.exists()) {
-			System.out.println("Login unsuccessful (user not found). Session ended.");
-			System.exit(0);
-		}
-		System.out.println("Login successful, please enter a command");
+	}
+	
+	public static void postLogin(User user1, Scanner sc) {
 		String next = sc.nextLine();
 		while(!next.equals("logout")){
+			if(next.equals("login"))
+				System.out.println("Invalid command (cannot login while logged in), please enter a command");
 			if(next.equals("addcredit")) {
-				System.out.println("Please enter username:");
+				System.out.println("AddCredit selected, Please enter username:");
 				String username2 = sc.nextLine();
 				System.out.println("Please enter amount of credit:");
 				int credit = sc.nextInt();
 				user1.addCredit(username2, credit);
 			}
 			if(next.equals("create")) {
-				System.out.println("Create account selected, pelase enter the username:");
+				System.out.println("Create account selected, please enter the username:");
 				String username2 = sc.nextLine();
 				System.out.println("Please enter the account type:");
 				String type = sc.nextLine();
 				user1.createAccount(username2, type);
 			}
 			if(next.equals("delete")) {
-				System.out.println("Delete account selected, pelase enter the username:");
+				System.out.println("Delete account selected, please enter the username:");
 				String username2 = sc.nextLine();
 				user1.deleteAccount(username2);
 			}
@@ -63,10 +57,32 @@ public class Console {
 			}
 			next = sc.nextLine();
 		}
-		writeToDTF("00 000000 0.00\n");
-		System.out.println("Session ended");
-		System.exit(0);
-		
+	}
+	
+	public static void logout(User user1) {
+		writeToDTF("00 " +  user1.getUser() + " " + user1.getUserType() + " " + user1.getCredit() + "\n");
+		System.out.println("You're now logged out, please enter a command");
+	}
+	
+	public static User login(Scanner sc) {
+		String command = sc.nextLine();
+		while (!command.equals("login")) {
+			System.out.println("Invalid command (must be logged in first). Please try again.");
+			command = sc.nextLine();
+		}
+		System.out.println("Please enter your username");
+		String username = sc.nextLine();
+		User user1 = new User(username);
+		while (!user1.exists()) {
+			System.out.println("Login unsuccessful (user not found). Please enter your username.");
+			username = sc.nextLine();
+			user1.setUser(username);
+		}
+		if(user1.getUserType().equals("AA"))
+			System.out.println("Privileged Login successful, now logged in as " + user1.getUser() + ", please enter a command");
+		else
+			System.out.println("Non-privileged Login successful, now logged in as " + user1.getUser() + ", please enter a command");
+		return user1;
 	}
 	
 	public static void writeToDTF(String msg) {
