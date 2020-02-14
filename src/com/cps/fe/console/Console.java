@@ -8,6 +8,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import com.cps.fe.tickets.Tickets;
 import com.cps.fe.user.User;
 
 public class Console {
@@ -25,7 +26,10 @@ public class Console {
 			System.exit(0);
 		}
 		String username = sc.nextLine();
+		
 		User user1 = new User(username);
+		Tickets tickets = new Tickets();
+		
 		if (!user1.exists()) {
 			System.out.println("Login unsuccessful (user not found). Session ended.");
 			System.exit(0);
@@ -48,6 +52,22 @@ public class Console {
 				user1.createAccount(username2, type);
 			}
 			if(next.equals("buy")) {
+				/*
+				 * Please enter the event title:
+Please enter the number of tickets:
+Please enter the seller’s username:
+You are buying 1 tickets for event1 from admin for $10.00, can you please confirm with yes/no?
+Transaction confirmed, please enter a command.
+				 * */
+				
+				System.out.println("Please enter the event title:");
+				String eventTitle = sc.nextLine();
+				System.out.println("Please enter the number of tickets:");
+				String numOfTickets = sc.nextLine();
+
+				//String returnMsg = Buy();
+				
+				
 				
 			}
 			if(next.equals("sell")) {
