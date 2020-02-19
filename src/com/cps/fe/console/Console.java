@@ -8,6 +8,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import com.cps.fe.tickets.Tickets;
 import com.cps.fe.user.User;
 
 public class Console {
@@ -15,8 +16,10 @@ public class Console {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome, please enter a command.");
+
 		while(true) {
 		User user1 = login(sc);
+    Tickets tickets = new Tickets(user1);
 		postLogin(user1, sc);
 		logout(user1);
 		}
@@ -48,9 +51,23 @@ public class Console {
 			}
 			if(next.equals("buy")) {
 				
+				System.out.println("Please enter the event title:");
+				String eventTitle = sc.nextLine();
+				System.out.println("Please enter the number of tickets:");
+				int numOfTickets = Integer.parseInt(sc.nextLine());
+				System.out.println("Please enter the seller’s username:");
+				String sellersUsername = sc.nextLine();
+				tickets.buy(eventTitle, numOfTickets, sellersUsername);
 			}
 			if(next.equals("sell")) {
-				
+
+				System.out.println("Sell tickets selected, please enter an event:");
+				String eventTitle = sc.nextLine();
+				System.out.println(eventTitle + " selected, please enter the price:\n");
+				float price = Float.parseFloat(sc.nextLine());
+				System.out.println("Please enter the amount of tickets:");
+				int numOfTickets = Integer.parseInt(sc.nextLine());
+				tickets.sell(eventTitle, price, numOfTickets, username); // TODO: remove username and use inited one
 			}
 			if(next.equals("refund")) {
 				
