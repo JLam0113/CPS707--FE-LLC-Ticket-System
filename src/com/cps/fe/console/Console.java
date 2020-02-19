@@ -12,6 +12,7 @@ import com.cps.fe.tickets.Tickets;
 import com.cps.fe.user.User;
 
 public class Console {
+	private static Tickets tickets;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -19,7 +20,7 @@ public class Console {
 
 		while(true) {
 		User user1 = login(sc);
-    Tickets tickets = new Tickets(user1);
+		tickets = new Tickets(user1);
 		postLogin(user1, sc);
 		logout(user1);
 		}
@@ -67,7 +68,7 @@ public class Console {
 				float price = Float.parseFloat(sc.nextLine());
 				System.out.println("Please enter the amount of tickets:");
 				int numOfTickets = Integer.parseInt(sc.nextLine());
-				tickets.sell(eventTitle, price, numOfTickets, username); // TODO: remove username and use inited one
+				tickets.sell(eventTitle, price, numOfTickets); // TODO: remove username and use inited one
 			}
 			if(next.equals("refund")) {
 				

@@ -148,7 +148,7 @@ public class Tickets {
 
 	}
 
-	public void sell(String eventTitle, float sellPrice, int numOfTickets, String username)
+	public void sell(String eventTitle, float sellPrice, int numOfTickets)
 	{
 		// check for validity of purchase amount
 		// TODO: wait to get userType from user
