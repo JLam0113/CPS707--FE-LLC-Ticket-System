@@ -1,0 +1,3 @@
+event1              admin         1   10.00 
+END                                         
+EEEEEEEEEEEEEEEEEEE_SSSSSSSSSSSSS_TTT_PPPPPP

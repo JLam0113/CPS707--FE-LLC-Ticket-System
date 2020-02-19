@@ -28,7 +28,7 @@ public class Console {
 		String username = sc.nextLine();
 		
 		User user1 = new User(username);
-		Tickets tickets = new Tickets();
+		Tickets tickets = new Tickets(user1);
 		
 		if (!user1.exists()) {
 			System.out.println("Login unsuccessful (user not found). Session ended.");
@@ -52,26 +52,24 @@ public class Console {
 				user1.createAccount(username2, type);
 			}
 			if(next.equals("buy")) {
-				/*
-				 * Please enter the event title:
-Please enter the number of tickets:
-Please enter the seller’s username:
-You are buying 1 tickets for event1 from admin for $10.00, can you please confirm with yes/no?
-Transaction confirmed, please enter a command.
-				 * */
 				
 				System.out.println("Please enter the event title:");
 				String eventTitle = sc.nextLine();
 				System.out.println("Please enter the number of tickets:");
-				String numOfTickets = sc.nextLine();
-
-				//String returnMsg = Buy();
-				
-				
-				
+				int numOfTickets = Integer.parseInt(sc.nextLine());
+				System.out.println("Please enter the sellerâ€™s username:");
+				String sellersUsername = sc.nextLine();
+				tickets.buy(eventTitle, numOfTickets, sellersUsername);
 			}
 			if(next.equals("sell")) {
-				
+
+				System.out.println("Sell tickets selected, please enter an event:");
+				String eventTitle = sc.nextLine();
+				System.out.println(eventTitle + " selected, please enter the price:\n");
+				float price = Float.parseFloat(sc.nextLine());
+				System.out.println("Please enter the amount of tickets:");
+				int numOfTickets = Integer.parseInt(sc.nextLine());
+				tickets.sell(eventTitle, price, numOfTickets, username); // TODO: remove username and use inited one
 			}
 			if(next.equals("refund")) {
 				
