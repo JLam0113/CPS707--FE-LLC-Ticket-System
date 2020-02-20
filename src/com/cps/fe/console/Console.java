@@ -64,14 +64,28 @@ public class Console {
 
 				System.out.println("Sell tickets selected, please enter an event:");
 				String eventTitle = sc.nextLine();
-				System.out.println(eventTitle + " selected, please enter the price:\n");
+				System.out.println(eventTitle + " selected, please enter the price:");
 				float price = Float.parseFloat(sc.nextLine());
 				System.out.println("Please enter the amount of tickets:");
 				int numOfTickets = Integer.parseInt(sc.nextLine());
 				tickets.sell(eventTitle, price, numOfTickets); // TODO: remove username and use inited one
 			}
 			if(next.equals("refund")) {
-				
+				if(user1.getUserType().equals("AA")) {
+				System.out.println("Refund selected, please enter the buyer's username:");
+				String buyer = sc.nextLine();
+				System.out.println("Please enter the seller's username:");
+				String seller = sc.nextLine();
+				System.out.println(buyer + " is the buyer, and " + seller + " is the seller, please enter the amount of credit:");
+				int credit = Integer.parseInt(sc.nextLine());
+				tickets.refund(buyer, seller, credit);
+				}
+				else
+					System.out.println("User is non privileged, please enter a command:");
+			}
+			if(next.equals("exit")) {
+				System.out.println("Session ended");
+				System.exit(0);
 			}
 			next = sc.nextLine();
 		}
@@ -85,6 +99,10 @@ public class Console {
 	public static User login(Scanner sc) {
 		String command = sc.nextLine();
 		while (!command.equals("login")) {
+			if(command.equals("exit")) {
+				System.out.println("Session ended");
+				System.exit(0);
+			}
 			System.out.println("Invalid command (must be logged in first). Please try again.");
 			command = sc.nextLine();
 		}

@@ -193,6 +193,16 @@ public class Tickets {
 		}
 
 	}
+	
+	public void refund(String buyer, String seller, int credit) {
+		User userBuyer = new User(buyer);
+		User userSeller = new User(seller);
+		if(userBuyer.exists() && userSeller.exists()) {
+		userBuyer.updateCredit(credit);
+		userSeller.updateCredit(credit * -1);
+		writeToDTF("05 " + buyer + " " + seller + " " + credit + "\n");
+		}
+	}
 
 	//TODO: use method
 	public void writeToDTF(String msg) {
