@@ -369,7 +369,6 @@ public class User {
 					user2.delete();
 					this.writeToDTF("02 " + user2.username + " " + user2.userType + " " + user2.credit + " \n");
 					System.out.println("Transaction successful, please enter a command.");
-					clean();
 				}
 			}
 			catch (FileNotFoundException e) 
@@ -414,59 +413,5 @@ public class User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-	}
-
-	public void clean() {
-		try {
-			
-			//Get the local path for accounts.txt
-			java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
-			java.net.URL url2 = User.class.getClassLoader().getResource("resources/temp.txt");
-				
-			File file = new File(url.getPath());
-			File file2 = new File(url2.getPath());
-			
-			Scanner sc = new Scanner(file);
-			FileWriter fr;
-			try {
-				fr = new FileWriter(file2,true);
-				while (sc.hasNextLine()) {
-					String temp = sc.nextLine();
-					String[] temp2 = temp.split(" ");
-					if(temp2[0].equals("\n"))
-						fr.write("");
-					else
-						fr.write(temp + "\n");
-				}
-				// Rename file
-				PrintWriter pw = new PrintWriter(file);
-				pw.print("");
-				pw.close();
-				fr.close();
-				sc.close();
-				sc = new Scanner(file2);
-				fr = new FileWriter(file,true);
-				while (sc.hasNextLine()) {
-					String temp = sc.nextLine();
-					String[] temp2 = temp.split(" ");
-					if(temp2[0].equals("\n"))
-						fr.write("");
-					else
-						fr.write(temp + "\n");
-				}
-		
-				pw = new PrintWriter(file2);
-				pw.print("");
-				pw.close();
-				fr.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			sc.close();
-			}
-			 catch (FileNotFoundException e) {
-				 System.out.println(e);
-		}
 	}
 }
