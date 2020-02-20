@@ -56,7 +56,7 @@ public class Console {
 				String eventTitle = sc.nextLine();
 				System.out.println("Please enter the number of tickets:");
 				int numOfTickets = Integer.parseInt(sc.nextLine());
-				System.out.println("Please enter the seller’s username:");
+				System.out.println("Please enter the seller's username:");
 				String sellersUsername = sc.nextLine();
 				tickets.buy(eventTitle, numOfTickets, sellersUsername);
 			}

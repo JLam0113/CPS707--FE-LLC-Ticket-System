@@ -126,8 +126,11 @@ public class Tickets {
 			// update tickets.txt and balance
 			int resTickets = qtyAvaliable - numOfTickets;
 			updateTicketsValues(eventTitle, seller, String.valueOf(resTickets));
-			int resPrice = user.getCredit() - (int) (price*numOfTickets);
-			user.updateCredit(resPrice);
+			//int resPrice = user.getCredit() - (int) (price*numOfTickets);
+			int resPrice = (int) (price*numOfTickets);
+			User sellerUser = new User(sellersUsername);
+			sellerUser.updateCredit(resPrice);
+			user.updateCredit(resPrice * -1);
 
 			System.out.println("Transaction confirmed, please enter a command.");
 			sc.close();
