@@ -1,4 +1,3 @@
 event1              admin         1   10.00 
-event2              admin         2   10.0  
-event3              admin         2   10.0  
 END                                         
+EEEEEEEEEEEEEEEEEEE_SSSSSSSSSSSSS_TTT_PPPPPP

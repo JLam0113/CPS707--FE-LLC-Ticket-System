@@ -273,8 +273,11 @@ public class User {
 	}
 	
 	public void addCredit(String user, int credit) {
-		if (user.equals(this.username))
+		if (user.equals(this.username)) {
 			this.updateCredit(credit);
+			this.writeToDTF("06 " + this.username + " " + credit + " \n");
+			System.out.println("Transaction successful, please enter a command.");
+		}
 		else if (this.userType.equals("AA")) {
 			try 
 			{

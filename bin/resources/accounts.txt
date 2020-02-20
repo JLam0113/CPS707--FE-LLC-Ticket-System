@@ -1,3 +1,5 @@
-admin AA 1980.00
-user1 FS 100.00
+admin AA 1020.00
+user1 BS 20.00
 
+
+admin2 AA 0.00
