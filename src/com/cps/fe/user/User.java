@@ -1,3 +1,12 @@
+/*
+ * The following is our prototype ticket system application for CPS 707 Assignment 2. It is able to do all the required functionalities and handles some error checking.
+ * It still doesn't meet all requirements and pass all tests as that is leftover for assignment 3, but it does the bare minimum of performing all functionalities to some degree.
+ * @author FE LLC
+ * @author Jessye Lam 500702091
+ * @author Christopher Seow 500782570
+ * @author Michael Tsao 500694108
+ * CPS707 - Assignment 2
+ */
 package com.cps.fe.user;
 
 import java.io.File;
@@ -9,12 +18,19 @@ import java.time.LocalDate;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/*
+ * This class is used to handle all things related to the accounts.txt file.
+ */
 public class User {
+	
 	String username;
 	String userType;
 	int credit;
 
-
+	/*
+	 * This is the constructor for setting up the user.
+	 * @param username Username of person logging in.
+	 */
 	public User(String username) {
 		this.username = username;
 		try {
@@ -40,18 +56,34 @@ public class User {
 			}
 	}
 	
+	/*
+	 * This returns the username of the user.
+	 * @return String This is the username.
+	 */
 	public String getUser() {
 		return this.username;
 	}
 	
+	/*
+	 * This returns the usertype of the user.
+	 * @return String This is the usertype.
+	 */
 	public String getUserType() {
 		return this.userType;
 	}
 	
+	/*
+	 * This returns the amount of credits of the user.
+	 * @return int This is the amount of credits.
+	 */
 	public int getCredit() {
 		return this.credit;
 	}
 	
+	/*
+	 * This method is used as an alternative to the constructor. Used to change the user to a different user.
+	 * @param username This is the username of the user to be changed to.
+	 */
 	public void setUser(String username) {
 		this.username = username;
 		try {
@@ -77,6 +109,10 @@ public class User {
 			}
 	}
 	
+	/*
+	 * This method is used to see if the user logging in is real.
+	 * @return true if the user exists, false otherwise.
+	 */
 	public boolean exists() {
 		try {
 		
@@ -100,6 +136,10 @@ public class User {
 		return false;
 	}
 	
+	/*
+	 * This method is used to write the file with the updated credit value.
+	 * @param credit This is the credit to be added or subtracted to the current credit value.
+	 */
 	public void updateCredit(int credit) {
 		try {
 			
@@ -164,6 +204,9 @@ public class User {
 				}
 	}
 	
+	/*
+	 * This method is used to delete the account from accounts.txt file.
+	 */
 	public void delete() {
 		try {
 			
@@ -221,6 +264,11 @@ public class User {
 				}
 	}
 	
+	/*
+	 * This method is used to create an account.
+	 * @param username This is username to be created.
+	 * @param type This is the type to set the user to.
+	 */
 	public void createAccount(String username, String type){
 		if (username.length() >= 16) {
 			System.out.println("Username is too long (max 15), please enter a command");
@@ -272,6 +320,11 @@ public class User {
 			System.out.println("You are not authorized to do that. please enter a command");
 	}
 	
+	/*
+	 * This method is used when addcredit is called, this method is mainly for verification on the constraints.
+	 * @param user Username to add credit to.
+	 * @param credit Amount of credit to be added.
+	 */
 	public void addCredit(String user, int credit) {
 		if (user.equals(this.username)) {
 			this.updateCredit(credit);
@@ -335,6 +388,10 @@ public class User {
 			System.out.println("Transaction cancelled (user is invalid), please enter a command");
 	}
 	
+	/*
+	 * This method is called when delete is entered. This method is mainly used for verification on the constraints.
+	 * @param user User to be deleted.
+	 */
 	public void deleteAccount(String user) {
 		if (this.userType.equals("AA")) {
 			try 
@@ -383,6 +440,10 @@ public class User {
 			System.out.println("Transaction cancelled (user is invalid), please enter a command");
 	}
 	
+	/*
+	 * This method is used to write to the daily transaction file.
+	 * @param msg This is the string written to the file.
+	 */
 	public void writeToDTF(String msg) {
 		try 
 		{

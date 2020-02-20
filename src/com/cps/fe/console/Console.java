@@ -1,3 +1,12 @@
+/*
+ * The following is our prototype ticket system application for CPS 707 Assignment 2. It is able to do all the required functionalities and handles some error checking.
+ * It still doesn't meet all requirements and pass all tests as that is leftover for assignment 3, but it does the bare minimum of performing all functionalities to some degree.
+ * @author FE LLC
+ * @author Jessye Lam 500702091
+ * @author Christopher Seow 500782570
+ * @author Michael Tsao 500694108
+ * CPS707 - Assignment 2
+ */
 package com.cps.fe.console;
 
 import java.io.File;
@@ -11,9 +20,16 @@ import java.util.Scanner;
 import com.cps.fe.tickets.Tickets;
 import com.cps.fe.user.User;
 
+/*
+ * This class is used to handle the frontend portion of the system. The user will mainly interact with this class.
+ */
 public class Console {
 	private static Tickets tickets;
 
+	/*
+	 * This is the main method to handle the inputs.
+	 * @param args Unused.
+	 */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome, please enter a command.");
@@ -26,6 +42,11 @@ public class Console {
 		}
 	}
 	
+	/*
+	 * This method is used to handle interactions after logging in.
+	 * @param user1 This is the User that is logged in.
+	 * @param sc This is the scanner to read inputs.
+	 */
 	public static void postLogin(User user1, Scanner sc) {
 		String next = sc.nextLine();
 		while(!next.equals("logout")){
@@ -91,11 +112,20 @@ public class Console {
 		}
 	}
 	
+	/*
+	 * This is the method to logout after the user enters logout, this is called.
+	 * @param user1 This is the user that is logging out. 
+	 */
 	public static void logout(User user1) {
 		writeToDTF("00 " +  user1.getUser() + " " + user1.getUserType() + " " + user1.getCredit() + "\n");
 		System.out.println("You're now logged out, please enter a command");
 	}
 	
+	/*
+	 * This is the method that handles the login portion.
+	 * @param sc This is the scanner used to handle inputs.
+	 * @return User This returns the user logging in.
+	 */
 	public static User login(Scanner sc) {
 		String command = sc.nextLine();
 		while (!command.equals("login")) {
@@ -121,6 +151,10 @@ public class Console {
 		return user1;
 	}
 	
+	/*
+	 * This method is used to write to the daily transaction file.
+	 * @param msg This is the string written to the file.
+	 */
 	public static void writeToDTF(String msg) {
 		try 
 		{

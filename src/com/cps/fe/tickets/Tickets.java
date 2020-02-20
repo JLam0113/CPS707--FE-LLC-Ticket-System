@@ -1,3 +1,12 @@
+/*
+ * The following is our prototype ticket system application for CPS 707 Assignment 2. It is able to do all the required functionalities and handles some error checking.
+ * It still doesn't meet all requirements and pass all tests as that is leftover for assignment 3, but it does the bare minimum of performing all functionalities to some degree.
+ * @author FE LLC
+ * @author Jessye Lam 500702091
+ * @author Christopher Seow 500782570
+ * @author Michael Tsao 500694108
+ * CPS707 - Assignment 2
+ */
 package com.cps.fe.tickets;
 
 import java.io.*;
@@ -7,11 +16,17 @@ import java.util.Scanner;
 
 import com.cps.fe.user.User;
 
+/*
+ * This class is mainly used to handle all interactions with the available tickets file.
+ */
 public class Tickets {
 	private User user;
 	private boolean soldItemThisSession;
 	private Scanner consoleScanner;
 
+	/*
+	 * Initial constructor
+	 */
 	public Tickets(User user, Scanner consoleScanner)
 	{
 		this.user = user;
@@ -20,6 +35,12 @@ public class Tickets {
 		soldItemThisSession = false;
 	}
 
+	/*
+	 * This method is called when the buy command is entered.
+	 * @param eventTitle Event to be bought from.
+	 * @param numOfTickets Number of tickets being bought.
+	 * @param sellersUsername Username of the seller.
+	 */
 	public void buy(String eventTitle, int numOfTickets, String sellersUsername)
 	{
 		boolean foundEvent = false;
@@ -147,6 +168,12 @@ public class Tickets {
 
 	}
 
+	/*
+	 * This method is used when the sell command is entered.
+	 * @param eventTitle Event to be sold to.
+	 * @param sellPrice Amount for each ticket.
+	 * @param numOfTickets Number of tickets being sold.
+	 */
 	public void sell(String eventTitle, float sellPrice, int numOfTickets)
 	{
 		// check for validity of purchase amount
@@ -195,6 +222,12 @@ public class Tickets {
 
 	}
 	
+	/*
+	 * This method is used when refund command is entered.
+	 * @param buyer This is the user who bought.
+	 * @param seller This is the seller who sold.
+	 * @param credit This is the amount of credits transaction.
+	 */
 	public void refund(String buyer, String seller, int credit) {
 		User userBuyer = new User(buyer);
 		User userSeller = new User(seller);
@@ -205,6 +238,12 @@ public class Tickets {
 		}
 	}
 
+	/*
+	 * This method is used to write to the tickets.txt file.
+	 * @param findEvtName This is the name of the event.
+	 * @param findSeller This is the seller.
+	 * @param updateQty This is the number of tickets.
+	 */
 	public static void updateTicketsValues(String findEvtName, String findSeller, String updateQty) throws IOException {
 		java.net.URL url = User.class.getClassLoader().getResource("resources/tickets.txt");
 
@@ -245,6 +284,13 @@ public class Tickets {
 		fos.close();
 	}
 
+	/*
+	 * This method is used to write to the tickets.txt file.
+	 * @param eventName This is the event title.
+	 * @param sellerName This is the seller.
+	 * @param quantity This is the amount.
+	 * @param price This is the price.
+	 */
 	public static void addNewTicket(String eventName, String sellerName, String quantity, String price) throws IOException {
 		java.net.URL url = User.class.getClassLoader().getResource("resources/tickets.txt");
 
@@ -279,7 +325,11 @@ public class Tickets {
 		fos.write(inputBuffer.toString().getBytes());
 		fos.close();
 	}
-
+	
+	/*
+	 * This method is used to write to the daily transaction file.
+	 * @param msg This is the string written to the file.
+	 */
 	public void writeToDTF(String msg) {
 		try
 		{
