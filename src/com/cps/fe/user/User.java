@@ -349,8 +349,8 @@ public class User {
 				if(!userExists)
 				{
 					//An account with this name does not exist in account.txt
-					System.out.println("Invalid username (user does not exist). Session ended.");
-					System.exit(0);
+					System.out.println("Invalid username (user does not exist), please enter a command.");
+					return;
 				}
 				else
 				{

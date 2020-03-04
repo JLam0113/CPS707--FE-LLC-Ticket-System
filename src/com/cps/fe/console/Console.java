@@ -83,7 +83,7 @@ public class Console {
 			}
 			if(next.equals("buy")) {
 				
-				System.out.println("Please enter the event title:");
+				System.out.println("Buy tickets selected, please enter the event title:");
 				String eventTitle = sc.nextLine();
 				System.out.println("Please enter the number of tickets:");
 				int numOfTickets = Integer.parseInt(sc.nextLine());
