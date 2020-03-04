@@ -30,7 +30,7 @@ public class Console {
 	 * This is the main method to handle the inputs.
 	 * @param args Unused.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome, please enter a command.");
 
@@ -47,7 +47,7 @@ public class Console {
 	 * @param user1 This is the User that is logged in.
 	 * @param sc This is the scanner to read inputs.
 	 */
-	public static void postLogin(User user1, Scanner sc) {
+	public static void postLogin(User user1, Scanner sc) throws IOException {
 		String next = sc.nextLine();
 		while(!next.equals("logout")){
 			if(next.equals("login"))
@@ -138,7 +138,9 @@ public class Console {
 		}
 		System.out.println("Please enter your username");
 		String username = sc.nextLine();
-		User user1 = new User(username);
+		String username_f = username.trim();
+		//System.out.println(username + " | " + username_f +"\n");
+		User user1 = new User(username_f);
 		while (!user1.exists()) {
 			System.out.println("Login unsuccessful (user not found). Please enter your username.");
 			username = sc.nextLine();
