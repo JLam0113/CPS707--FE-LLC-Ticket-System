@@ -9,10 +9,7 @@
  */
 package com.cps.fe.console;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -25,20 +22,33 @@ import com.cps.fe.user.User;
  */
 public class Console {
 	private static Tickets tickets;
+	private static String accountsPath = "accounts.txt";
+	private static String ticketsPath = "tickets.txt";
 
 	/*
 	 * This is the main method to handle the inputs.
 	 * @param args Unused.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
+
+		// set the proper input mode
 		Scanner sc = new Scanner(System.in);
+		if (args.length == 2)
+		{
+			accountsPath = args[0];
+			ticketsPath = args[1];
+		}
+
+		// start saving the output to file
+		//System.setOut(new PrintStream(new FileOutputStream(new File("outputs/" + args[0]))));
+
 		System.out.println("Welcome, please enter a command.");
 
 		while(true) {
-		User user1 = login(sc);
-		tickets = new Tickets(user1, sc);
-		postLogin(user1, sc);
-		logout(user1);
+			User user1 = login(sc);
+			tickets = new Tickets(user1, sc, ticketsPath, accountsPath);
+			postLogin(user1, sc);
+			logout(user1);
 		}
 	}
 	
@@ -116,7 +126,7 @@ public class Console {
 	 * This is the method to logout after the user enters logout, this is called.
 	 * @param user1 This is the user that is logging out. 
 	 */
-	public static void logout(User user1) {
+	public static void logout(User user1) throws FileNotFoundException {
 		writeToDTF("00 " +  user1.getUser() + " " + user1.getUserType() + " " + user1.getCredit() + "\n");
 		System.out.println("You're now logged out, please enter a command");
 	}
@@ -138,7 +148,7 @@ public class Console {
 		}
 		System.out.println("Please enter your username");
 		String username = sc.nextLine();
-		User user1 = new User(username);
+		User user1 = new User(username, accountsPath);
 		while (!user1.exists()) {
 			System.out.println("Login unsuccessful (user not found). Please enter your username.");
 			username = sc.nextLine();
@@ -156,10 +166,10 @@ public class Console {
 	 * @param msg This is the string written to the file.
 	 */
 	public static void writeToDTF(String msg) {
-		try 
-		{
+
 			LocalDate localDate = LocalDate.now();
 			String date = new String("resources/" + localDate + ".dtf");
+			/*
 			java.net.URL url = User.class.getClassLoader().getResource(date);
 			URL url2 = User.class.getClassLoader().getResource("resources/");
 			
@@ -168,7 +178,9 @@ public class Console {
 				temp.createNewFile();
 				url = User.class.getClassLoader().getResource(date);
 			}
-			File file = new File(url.getPath());			
+
+			 */
+			File file = new File(date);
 
 			FileWriter fr;
 			try {
@@ -179,15 +191,7 @@ public class Console {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		}
-		catch (FileNotFoundException e) 
-		{
-			 System.out.println(e);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+
 	}
 
 }

@@ -23,16 +23,20 @@ public class Tickets {
 	private User user;
 	private boolean soldItemThisSession;
 	private Scanner consoleScanner;
+	private static String url = "tickets.txt";
+	private static String url2 = "accounts.txt";
 
 	/*
 	 * Initial constructor
 	 */
-	public Tickets(User user, Scanner consoleScanner)
+	public Tickets(User user, Scanner consoleScanner, String ticketsPath, String accountsPath)
 	{
 		this.user = user;
 		this.consoleScanner = consoleScanner;
 
 		soldItemThisSession = false;
+        url = ticketsPath;
+        url2 = accountsPath;
 	}
 
 	/*
@@ -67,9 +71,8 @@ public class Tickets {
 		//Get path for tickets.txt
 		try {
 			//Get the local path for accounts.txt
-			java.net.URL url = User.class.getClassLoader().getResource("resources/tickets.txt");
 
-			File file = new File(url.getPath());
+			File file = new File(url);
 			Scanner sc = new Scanner(file);
 
 			String seller = "";
@@ -149,7 +152,7 @@ public class Tickets {
 			updateTicketsValues(eventTitle, seller, String.valueOf(resTickets));
 			//int resPrice = user.getCredit() - (int) (price*numOfTickets);
 			int resPrice = (int) (price*numOfTickets);
-			User sellerUser = new User(sellersUsername);
+			User sellerUser = new User(sellersUsername, url2);
 			sellerUser.updateCredit(resPrice);
 			user.updateCredit(resPrice * -1);
 
@@ -229,8 +232,8 @@ public class Tickets {
 	 * @param credit This is the amount of credits transaction.
 	 */
 	public void refund(String buyer, String seller, int credit) {
-		User userBuyer = new User(buyer);
-		User userSeller = new User(seller);
+		User userBuyer = new User(buyer, url2);
+		User userSeller = new User(seller, url2);
 		if(userBuyer.exists() && userSeller.exists()) {
 		userBuyer.updateCredit(credit);
 		userSeller.updateCredit(credit * -1);
@@ -245,9 +248,8 @@ public class Tickets {
 	 * @param updateQty This is the number of tickets.
 	 */
 	public static void updateTicketsValues(String findEvtName, String findSeller, String updateQty) throws IOException {
-		java.net.URL url = User.class.getClassLoader().getResource("resources/tickets.txt");
 
-		BufferedReader file = new BufferedReader(new FileReader(new File(url.getPath())));
+		BufferedReader file = new BufferedReader(new FileReader(new File(url)));
 		StringBuffer inputBuffer = new StringBuffer();
 		String curLine = "";
 		String evtName= "";
@@ -279,7 +281,7 @@ public class Tickets {
 		}
 
 		// overwrite entire file
-		FileOutputStream fos = new FileOutputStream(new File(url.getPath()));
+		FileOutputStream fos = new FileOutputStream(new File(url));
 		fos.write(inputBuffer.toString().getBytes());
 		fos.close();
 	}
@@ -292,9 +294,8 @@ public class Tickets {
 	 * @param price This is the price.
 	 */
 	public static void addNewTicket(String eventName, String sellerName, String quantity, String price) throws IOException {
-		java.net.URL url = User.class.getClassLoader().getResource("resources/tickets.txt");
 
-		BufferedReader file = new BufferedReader(new FileReader(new File(url.getPath())));
+		BufferedReader file = new BufferedReader(new FileReader(new File(url)));
 		StringBuffer inputBuffer = new StringBuffer();
 		String curLine = "";
 
@@ -321,7 +322,7 @@ public class Tickets {
 		inputBuffer.append('\n');
 
 		// overwrite entire file
-		FileOutputStream fos = new FileOutputStream(new File(url.getPath()));
+		FileOutputStream fos = new FileOutputStream(new File(url));
 		fos.write(inputBuffer.toString().getBytes());
 		fos.close();
 	}
@@ -331,10 +332,10 @@ public class Tickets {
 	 * @param msg This is the string written to the file.
 	 */
 	public void writeToDTF(String msg) {
-		try
-		{
+
 			LocalDate localDate = LocalDate.now();
 			String date = new String("resources/" + localDate + ".dtf");
+			/*
 			java.net.URL url = User.class.getClassLoader().getResource(date);
 			URL url2 = User.class.getClassLoader().getResource("resources/");
 
@@ -343,7 +344,8 @@ public class Tickets {
 				temp.createNewFile();
 				url = User.class.getClassLoader().getResource(date);
 			}
-			File file = new File(url.getPath());
+			 */
+			File file = new File(date);
 
 			FileWriter fr;
 			try {
@@ -354,13 +356,7 @@ public class Tickets {
 				e.printStackTrace();
 			}
 
-		}
-		catch (FileNotFoundException e)
-		{
-			System.out.println(e);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 }

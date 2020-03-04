@@ -27,18 +27,20 @@ public class User {
 	String userType;
 	int credit;
 
+	private String url = "accounts.txt";
+
 	/*
 	 * This is the constructor for setting up the user.
 	 * @param username Username of person logging in.
 	 */
-	public User(String username) {
+	public User(String username, String accountsPath) {
 		this.username = username;
 		try {
 		
 		//Get the local path for accounts.txt
-		java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+		url = accountsPath;
 			
-		File file = new File(url.getPath());
+		File file = new File(url);
 		Scanner sc = new Scanner(file);
 		while (sc.hasNextLine()) {
 			String temp = sc.nextLine();
@@ -87,11 +89,8 @@ public class User {
 	public void setUser(String username) {
 		this.username = username;
 		try {
-		
-		//Get the local path for accounts.txt
-		java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
-			
-		File file = new File(url.getPath());
+
+		File file = new File(url);
 		Scanner sc = new Scanner(file);
 		while (sc.hasNextLine()) {
 			String temp = sc.nextLine();
@@ -116,10 +115,9 @@ public class User {
 	public boolean exists() {
 		try {
 		
-		//Get the local path for accounts.txt
-		java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+
 			
-		File file = new File(url.getPath());	
+		File file = new File(url);	
 		Scanner sc = new Scanner(file);
 		while (sc.hasNextLine()) {
 			String temp = sc.nextLine();
@@ -144,10 +142,9 @@ public class User {
 		try {
 			
 			//Get the local path for accounts.txt
-			java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
 			java.net.URL url2 = User.class.getClassLoader().getResource("resources/temp.txt");
 				
-			File file = new File(url.getPath());
+			File file = new File(url);
 			File file2 = new File(url2.getPath());
 			
 			Scanner sc = new Scanner(file);
@@ -211,10 +208,9 @@ public class User {
 		try {
 			
 			//Get the local path for accounts.txt
-			java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
 			java.net.URL url2 = User.class.getClassLoader().getResource("resources/temp.txt");
 				
-			File file = new File(url.getPath());
+			File file = new File(url);
 			File file2 = new File(url2.getPath());
 			
 			Scanner sc = new Scanner(file);
@@ -277,11 +273,9 @@ public class User {
 		if (this.userType.equals("AA")) {
 			try 
 			{
-				//Write to file with new account info
-				//Get the local path for accounts.txt
-				java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
+
 					
-				File file = new File(url.getPath());
+				File file = new File(url);
 				Scanner sc = new Scanner(file);
 				
 				while (sc.hasNextLine()) 
@@ -335,10 +329,8 @@ public class User {
 			try 
 			{
 				//TODO: Check if entered username exists in accounts.txt
-				//Get the local path for accounts.txt
-				java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
 					
-				File file = new File(url.getPath());
+				File file = new File(url);
 				Scanner sc = new Scanner(file);
 				boolean userExists = false;
 				
@@ -363,7 +355,7 @@ public class User {
 				else
 				{
 					//Update the users credit
-					User user2 = new User(user);
+					User user2 = new User(user, url);
 					user2.updateCredit(credit);	
 					this.writeToDTF("06 " + user2.username + " " + credit + " \n");
 					System.out.println("Transaction successful, please enter a command.");
@@ -375,7 +367,7 @@ public class User {
 			}	
 		}
 		else if (this.userType.equals("FS")) {
-			User user2 = new User(user);
+			User user2 = new User(user, url);
 			if(user2.userType.equals("AA"))
 				System.out.println("Transaction cancelled (user is invalid), please enter a command");
 			else {
@@ -398,9 +390,8 @@ public class User {
 			{
 				//TODO: Check if entered username exists in accounts.txt
 				//Get the local path for accounts.txt
-				java.net.URL url = User.class.getClassLoader().getResource("resources/accounts.txt");
-					
-				File file = new File(url.getPath());
+
+				File file = new File(url);
 				Scanner sc = new Scanner(file);
 				boolean userExists = false;
 				
@@ -425,7 +416,7 @@ public class User {
 				else
 				{
 					//Update the users credit
-					User user2 = new User(user);
+					User user2 = new User(user, url);
 					user2.delete();
 					this.writeToDTF("02 " + user2.username + " " + user2.userType + " " + user2.credit + " \n");
 					System.out.println("Transaction successful, please enter a command.");
@@ -445,10 +436,10 @@ public class User {
 	 * @param msg This is the string written to the file.
 	 */
 	public void writeToDTF(String msg) {
-		try 
-		{
+
 			LocalDate localDate = LocalDate.now();
 			String date = new String("resources/" + localDate + ".dtf");
+			/*
 			java.net.URL url = User.class.getClassLoader().getResource(date);
 			URL url2 = User.class.getClassLoader().getResource("resources/");
 			
@@ -457,7 +448,9 @@ public class User {
 				temp.createNewFile();
 				url = User.class.getClassLoader().getResource(date);
 			}
-			File file = new File(url.getPath());			
+			*/
+
+			File file = new File(date);
 
 			FileWriter fr;
 			try {
@@ -469,13 +462,6 @@ public class User {
 				e.printStackTrace();
 			}
 			
-		}
-		catch (FileNotFoundException e) 
-		{
-			 System.out.println(e);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+
 	}
 }
