@@ -58,6 +58,7 @@ public class Console {
 				System.out.println("Please enter amount of credit:");
 				int credit = sc.nextInt();
 				user1.addCredit(username2, credit);
+				System.out.println("Transaction Successful. Please enter a command");
 			}
 			if(next.equals("create")) {
 				System.out.println("Create account selected, please enter the username:");
@@ -65,6 +66,7 @@ public class Console {
 				System.out.println("Please enter the account type:");
 				String type = sc.nextLine();
 				user1.createAccount(username2, type);
+				System.out.println("Transaction Successful. Please enter a command");
 			}
 			if(next.equals("delete")) {
 				System.out.println("Delete account selected, please enter the username:");
@@ -110,6 +112,9 @@ public class Console {
 			}
 			next = sc.nextLine();
 		}
+		writeToDTF("00 000000 0.00\n");
+		System.out.println("Session ended");
+		System.exit(0);
 	}
 	
 	/*

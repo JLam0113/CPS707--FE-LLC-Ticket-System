@@ -455,7 +455,7 @@ public class User {
 			}
 			
 		}
-		catch (FileNotFoundException e) 
+		catch (FileNotFoundException e)
 		{
 			 System.out.println(e);
 		} catch (IOException e) {
