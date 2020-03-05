@@ -463,7 +463,7 @@ public class User {
 	public void writeToDTF(String msg) {
 
 			LocalDate localDate = LocalDate.now();
-			String date = new String("resources/" + localDate + ".dtf");
+			String date = new String("resources/DTF-" + localDate + ".dtf");
 			/*
 			java.net.URL url = User.class.getClassLoader().getResource(date);
 			URL url2 = User.class.getClassLoader().getResource("resources/");
