@@ -98,7 +98,9 @@ public class Console {
 				System.out.println("Sell tickets selected, please enter an event:");
 				String eventTitle = sc.nextLine();
 				System.out.println(eventTitle + " selected, please enter the price:");
-				float price = Float.parseFloat(sc.nextLine());
+				float pricef = Float.parseFloat(sc.nextLine());
+				//TEMP FIX*******
+				int price = Math.round(pricef);
 				System.out.println("Please enter the amount of tickets:");
 				int numOfTickets = Integer.parseInt(sc.nextLine());
 				tickets.sell(eventTitle, price, numOfTickets);
@@ -154,7 +156,6 @@ public class Console {
 		String username = sc.nextLine();
 		User user1 = new User(username, accountsPath);
 		while (!user1.exists()) {
-			System.out.println("Login unsuccessful (user not found). Please enter your username.");
 			username = sc.nextLine();
 			user1.setUser(username);
 		}

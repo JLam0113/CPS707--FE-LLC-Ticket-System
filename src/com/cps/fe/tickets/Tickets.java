@@ -59,18 +59,27 @@ public class Tickets {
 		if(this.user.getUserType() != "AA" && ticCount >= 4)
 		{
 			System.out.println("Only 4 tickets can be purhcased per session. Please exit and return to purchase more, please enter a command.");
+			//reset found event values
+			foundEvent = false;
+			foundSeller = false;
 			return;
 		}
 		else if (user.getUserType().equalsIgnoreCase("SS"))
 		{
 	
 			// check for validity of purchase amount
-			System.out.println("Invalid number of tickets, please enter a command.");
+			System.out.println("Invalid command (account not privileged), please enter a command.");
+			//reset found event values
+			foundEvent = false;
+			foundSeller = false;
 			return;
 		}
 		
 		else if (this.userSoldThisSession.equals(sellersUsername) || this.eventSoldThisSession.equals(eventTitle)) {
 			System.out.println("Invalid transaction (ticket was sold this session), please enter a command.");
+			//reset found event values
+			foundEvent = false;
+			foundSeller = false;
 			return;
 		}
 		//Get path for tickets.txt
@@ -116,12 +125,18 @@ public class Tickets {
 			{
 				System.out.println("Event not found, please enter a command.");
 				sc.close();
+				//reset found event values
+				foundEvent = false;
+				foundSeller = false;
 				return;
 			}
 
 			if (!foundSeller)
 			{
 				System.out.println("Invalid command (account not privileged), please enter a command.");
+				//reset found event values
+				foundEvent = false;
+				foundSeller = false;
 				return;
 			}
 	
@@ -130,16 +145,23 @@ public class Tickets {
 			if (numOfTickets > 4)
 			{
 				System.out.println("Invalid number of tickets, please enter a command.");
+				//reset found event values
+				foundEvent = false;
+				foundSeller = false;
 				return;
 			}
 	
 				int qtyAvaliable = Integer.parseInt(curLine.substring(34,38).trim());
-				float price = Float.parseFloat(curLine.substring(38,44));
-	
+				float pricef = Float.parseFloat(curLine.substring(38,44));
+				int price = Math.round(pricef);
+				
 				if (numOfTickets > qtyAvaliable)
 				{
 					System.out.println("Invalid Quantity");
 					sc.close();
+					//reset found event values
+					foundEvent = false;
+					foundSeller = false;
 					return;
 				}
 	
@@ -154,6 +176,9 @@ public class Tickets {
 					{
 						System.out.println("Transaction cancelled, please enter a command.");
 						sc.close();
+						//reset found event values
+						foundEvent = false;
+						foundSeller = false;
 						return;
 					}
 					else if (confirmation.equalsIgnoreCase("yes")) break;
@@ -176,6 +201,10 @@ public class Tickets {
 				String creditDTF = String.format("%03d", price);
 				String ticketDTF = String.format("%03d", numOfTickets);
 				writeToDTF("04 " + eventDTF + " " + buyer2DTF + " " + ticketDTF + " " + creditDTF + ".00\n");
+				
+				//reset found event values
+				foundEvent = false;
+				foundSeller = false;
 			}
 			catch (FileNotFoundException e) {
 				System.out.println(e);

@@ -29,6 +29,7 @@ public class User {
 	String username;
 	String userType;
 	int credit;
+	boolean foundUser;
 
 	private String url = "accounts.txt";
 
@@ -45,6 +46,7 @@ public class User {
 			
 		File file = new File(url);
 		Scanner sc = new Scanner(file);
+		foundUser = false;
 		while (sc.hasNextLine()) {
 			String temp = sc.nextLine();
 			String[] temp2 = temp.split(" ");
@@ -55,12 +57,17 @@ public class User {
 			//System.out.println(curr_user2 + " | " + curr_type + " | " + curr_credit + "\n");
 			//if(temp2[0].equals(this.username)) {
 			if(curr_user2.equals(this.username)) {
+				foundUser = true;
 				this.userType = curr_type;
 			//if(Double.parseDouble(temp2[2]) != 0.00)
 				this.credit = (int) Double.parseDouble(curr_credit);
 			}
 		}
 		sc.close();
+		if(foundUser == false)
+		{
+			System.out.println("Login unsuccessful (user not found). Please enter your username.");
+		}
 		}
 		 catch (FileNotFoundException e) {
 			 System.out.println(e);
@@ -110,6 +117,7 @@ public class User {
 			String[] temp2 = temp.split(" ");
 			//if(temp2[0].equals(this.username)) {
 			if(curr_user2.equals(this.username)) {
+				foundUser = true;
 				this.userType = curr_type;
 			//if(Double.parseDouble(temp2[2]) != 0.00)
 				this.credit = (int) Double.parseDouble(curr_credit);
@@ -127,10 +135,10 @@ public class User {
 	 * @return true if the user exists, false otherwise.
 	 */
 	public boolean exists() {
+		return foundUser;
+		/*	
 		try {
-		
 
-			
 		File file = new File(url);	
 		Scanner sc = new Scanner(file);
 		while (sc.hasNextLine()) {
@@ -147,7 +155,7 @@ public class User {
 		 catch (FileNotFoundException e) {
 			 System.out.println(e);
 			}
-		return false;
+			*/
 	}
 	
 	/*
