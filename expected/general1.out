@@ -3,5 +3,5 @@ Please enter your username
 Privileged Login successful, now logged in as admin, please enter a command
 AddCredit selected, Please enter username:
 Please enter amount of credit:
-Transaction unsuccessful (invalid input for price), please enter a command.
+Transaction unsuccessful (credit exceeded $1,000 or was less than 0), please enter a command.
 Session ended

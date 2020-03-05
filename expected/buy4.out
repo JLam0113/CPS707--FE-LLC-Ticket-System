@@ -4,10 +4,10 @@ Non-privileged Login successful, now logged in as user1, please enter a command
 Buy tickets selected, please enter the event title:
 Please enter the number of tickets:
 Please enter the seller's username:
-You are buying 1 tickets for event1 from admin for $10, can you please confirm with yes/no?
-Transaction confirmed, please enter a command
+You are buying 4 tickets for event2 from admin for $10, can you please confirm with yes/no?
+Transaction confirmed, please enter a command.
 Buy tickets selected, please enter the event title:
 Please enter the number of tickets:
 Please enter the seller's username:
-Transaction cancelled (user is not privileged to buy anymore tickets), please enter a command.
+Only 4 tickets can be purhcased per session. Please exit and return to purchase more, please enter a command.
 Session ended
