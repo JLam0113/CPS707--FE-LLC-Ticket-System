@@ -3,14 +3,14 @@ echo "========"
 echo "Running test cases"
 echo "========"
 
-if [[ -d "input" ]]; then
-  rm -rf input
+if [[ -d "inputs" ]]; then
+  rm -rf inputs
 fi
 cp -r "inputs_mastercopy" "inputs"
 
 lastDTF=$(ls resources/DTF*)
 
-if [[ -d $lastDTF ]]; then
+if [[ -e $lastDTF ]]; then
   mv $lastDTF resources/$(date +%s).dtf
 fi
 
