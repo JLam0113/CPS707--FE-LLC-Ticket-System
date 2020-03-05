@@ -21,6 +21,7 @@ import com.cps.fe.user.User;
  */
 public class Tickets {
 	private User user;
+	private int ticCount = 0;
 	private boolean soldItemThisSession;
 	private Scanner consoleScanner;
 	private static String url = "tickets.txt";
@@ -47,128 +48,134 @@ public class Tickets {
 	 */
 	public void buy(String eventTitle, int numOfTickets, String sellersUsername)
 	{
-		boolean foundEvent = false;
-		boolean foundSeller = false;
-
-		String curLine = "";
-		int lineIndex = 0;
-
-		// check for validity of purchase amount
-		if (user.getUserType().equalsIgnoreCase("SS"))
+		if(this.user.getUserType() != "AA" && ticCount >= 4)
 		{
-			System.out.println("Invalid command (account not privileged), please enter a command.");
-			return;
+			System.out.println("Only 4 tickets can be purhcased per session. Please exit and return to purchase more, please enter a command.");
 		}
-
-
-		// check for validity of purchase amount
-		if (numOfTickets > 4)
+		else
 		{
-			System.out.println("Invalid number of tickets, please enter a command.");
-			return;
-		}
-
-		//Get path for tickets.txt
-		try {
-			//Get the local path for accounts.txt
-
-			File file = new File(url);
-			Scanner sc = new Scanner(file);
-
-			String seller = "";
-
-			boolean curFoundEvent = false;
-			boolean curFoundUser = false;
-
-			while (sc.hasNextLine()) {
-				curLine = sc.nextLine();
-				String evtName = curLine.substring(0,20).trim();
-				seller = curLine.substring(20,34).trim();
-				lineIndex++;
-
-				if (evtName.equalsIgnoreCase(eventTitle))
-				{
-					foundEvent = true;
-					curFoundEvent = true;
-				}
-
-				if (seller.equalsIgnoreCase(sellersUsername))
-				{
-					foundSeller = true;
-					curFoundUser = true;
-				}
-
-				if (curFoundEvent && curFoundUser)
-				{
-					break;
-				}
-
-				curFoundEvent = false;
-				curFoundUser = false;
-			}
-
-			if (!foundEvent)
+			boolean foundEvent = false;
+			boolean foundSeller = false;
+	
+			String curLine = "";
+			int lineIndex = 0;
+	
+			// check for validity of purchase amount
+			if (user.getUserType().equalsIgnoreCase("SS"))
 			{
-				System.out.println("Event not found, please enter a command.");
-				sc.close();
+				System.out.println("Invalid command (account not privileged), please enter a command.");
 				return;
 			}
-
-			if (!foundSeller)
+	
+	
+			// check for validity of purchase amount
+			if (numOfTickets > 4)
 			{
-				System.out.println("Invalid username, please enter a command.");
-				sc.close();
+				System.out.println("Invalid number of tickets, please enter a command.");
 				return;
 			}
-
-			int qtyAvaliable = Integer.parseInt(curLine.substring(34,38).trim());
-			float price = Float.parseFloat(curLine.substring(38,44));
-
-			if (numOfTickets > qtyAvaliable)
-			{
-				System.out.println("Invalid Quantity");
-				sc.close();
-				return;
-			}
-
-			// get confirmation
-			while (true)
-			{
-				System.out.println("You are buying "+numOfTickets+" tickets for "+ eventTitle +" from "+ seller +" for $"+price+", can you please confirm with yes/no?");
-				String confirmation = consoleScanner.nextLine();
-				confirmation = confirmation.trim();
-
-				if (confirmation.equalsIgnoreCase("no"))
+	
+			//Get path for tickets.txt
+			try {
+				//Get the local path for accounts.txt
+	
+				File file = new File(url);
+				Scanner sc = new Scanner(file);
+	
+				String seller = "";
+	
+				boolean curFoundEvent = false;
+				boolean curFoundUser = false;
+	
+				while (sc.hasNextLine()) {
+					curLine = sc.nextLine();
+					String evtName = curLine.substring(0,20).trim();
+					seller = curLine.substring(20,34).trim();
+					lineIndex++;
+	
+					if (evtName.equalsIgnoreCase(eventTitle))
+					{
+						foundEvent = true;
+						curFoundEvent = true;
+					}
+	
+					if (seller.equalsIgnoreCase(sellersUsername))
+					{
+						foundSeller = true;
+						curFoundUser = true;
+					}
+	
+					if (curFoundEvent && curFoundUser)
+					{
+						break;
+					}
+	
+					curFoundEvent = false;
+					curFoundUser = false;
+				}
+	
+				if (!foundEvent)
 				{
-					System.out.println("Transaction cancelled, please enter a command.");
+					System.out.println("Event not found, please enter a command.");
 					sc.close();
 					return;
 				}
-				else if (confirmation.equalsIgnoreCase("yes")) break;
+	
+				if (!foundSeller)
+				{
+					System.out.println("Invalid username, please enter a command.");
+					sc.close();
+					return;
+				}
+	
+				int qtyAvaliable = Integer.parseInt(curLine.substring(34,38).trim());
+				float price = Float.parseFloat(curLine.substring(38,44));
+	
+				if (numOfTickets > qtyAvaliable)
+				{
+					System.out.println("Invalid Quantity");
+					sc.close();
+					return;
+				}
+	
+				// get confirmation
+				while (true)
+				{
+					System.out.println("You are buying "+numOfTickets+" tickets for "+ eventTitle +" from "+ seller +" for $"+price+", can you please confirm with yes/no?");
+					String confirmation = consoleScanner.nextLine();
+					confirmation = confirmation.trim();
+	
+					if (confirmation.equalsIgnoreCase("no"))
+					{
+						System.out.println("Transaction cancelled, please enter a command.");
+						sc.close();
+						return;
+					}
+					else if (confirmation.equalsIgnoreCase("yes")) break;
+				}
+	
+				// update tickets.txt and balance
+				int resTickets = qtyAvaliable - numOfTickets;
+				updateTicketsValues(eventTitle, seller, String.valueOf(resTickets));
+				//int resPrice = user.getCredit() - (int) (price*numOfTickets);
+				int resPrice = (int) (price*numOfTickets);
+				User sellerUser = new User(sellersUsername, url2);
+				sellerUser.updateCredit(resPrice);
+				user.updateCredit(resPrice * -1);
+	
+				System.out.println("Transaction confirmed, please enter a command.");
+				ticCount += numOfTickets;
+				sc.close();
+	
+				writeToDTF("04 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + price + " \n");
 			}
-
-			// update tickets.txt and balance
-			int resTickets = qtyAvaliable - numOfTickets;
-			updateTicketsValues(eventTitle, seller, String.valueOf(resTickets));
-			//int resPrice = user.getCredit() - (int) (price*numOfTickets);
-			int resPrice = (int) (price*numOfTickets);
-			User sellerUser = new User(sellersUsername, url2);
-			sellerUser.updateCredit(resPrice);
-			user.updateCredit(resPrice * -1);
-
-			System.out.println("Transaction confirmed, please enter a command.");
-			sc.close();
-
-			writeToDTF("04 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + price + " \n");
-
+			catch (FileNotFoundException e) {
+				System.out.println(e);
+			}
+			catch (IOException e) {
+				System.out.println(e);
+			}
 		}
-		catch (FileNotFoundException e) {
-			System.out.println(e);
-		}
-		catch (IOException e) {
-			System.out.println(e);
-		}
-
 	}
 
 	/*
