@@ -371,7 +371,7 @@ public class User {
 	 * This method is called when delete is entered. This method is mainly used for verification on the constraints.
 	 * @param user User to be deleted.
 	 */
-	public void deleteAccount(String user) throws IOException {
+	public void deleteAccount(String user, String ticketsPath) throws IOException {
 		if (this.userType.equals("AA")) {
 			try 
 			{
@@ -383,6 +383,9 @@ public class User {
 				Scanner sc = new Scanner(file);
 				boolean userExists = false;
 				
+				//BufferedReader fileB = new BufferedReader(new FileReader(new File(ticketsPath)));
+				StringBuffer inputBuffer = new StringBuffer();
+				
 				while (sc.hasNextLine()) 
 				{
 					String temp = sc.nextLine();
@@ -393,6 +396,7 @@ public class User {
 					{
 						//user exists within system
 						userExists = true;
+						break;
 					}
 				}
 				sc.close();
@@ -405,12 +409,33 @@ public class User {
 				}
 				else
 				{
-					//Update the users credit
+					File file2 = new File(ticketsPath);
+					Scanner sc2 = new Scanner(file2);
+					
+					while (sc2.hasNextLine()) 
+					{
+						String temp = sc2.nextLine();
+						String[] temp2 = temp.split(" ");
+						String seller = temp.substring(20,34).trim();
+						if(seller.equals(user))
+						{
+							//remove these tickets from list
+						}
+						else
+							inputBuffer.append(temp +"\n");
+					}
+					
+					FileOutputStream fos = new FileOutputStream(new File(ticketsPath));
+					fos.write(inputBuffer.toString().getBytes());
+					fos.close();
+					sc2.close();
+					
+					//delete user
 					User user2 = new User(user,url);
-					user2.delete();
 					String usernameDTF = String.format("%-15s", user2.username);
 					String creditDTF = String.format("%06d", user2.credit);
 					this.writeToDTF("02 " + usernameDTF + " " + user2.userType + " " + creditDTF + ".00\n");
+					user2.delete();
 					System.out.println("Transaction successful, please enter a command.");
 				}
 			}

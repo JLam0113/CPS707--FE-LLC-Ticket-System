@@ -81,7 +81,7 @@ public class Console {
 			if(next.equals("delete")) {
 				System.out.println("Delete account selected, please enter the username:");
 				String username2 = sc.nextLine();
-				user1.deleteAccount(username2);
+				user1.deleteAccount(username2, ticketsPath);
 			}
 			if(next.equals("buy")) {
 				
