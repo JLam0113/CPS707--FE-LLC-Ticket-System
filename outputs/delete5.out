@@ -5,3 +5,6 @@ Delete account selected, please enter the username:
 Invalid username (user does not exist). Please enter a command.
 Buy tickets selected, please enter the event title:
 Please enter the number of tickets:
+Please enter the seller's username:
+Invalid command (account not privileged), please enter a command.
+Session ended
