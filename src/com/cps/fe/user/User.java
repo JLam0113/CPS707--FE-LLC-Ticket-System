@@ -232,7 +232,7 @@ public class User {
 	 * @param username This is username to be created.
 	 * @param type This is the type to set the user to.
 	 */
-	public void createAccount(String username, String type) throws IOException{
+	public void createAccount(String username, String type, int credit) throws IOException{
 		if (username.length() >= 16) {
 			System.out.println("Username is too long (max 15), please enter a command");
 			return;
@@ -271,7 +271,7 @@ public class User {
 				
 
 				String usernameDTF = String.format("%-15s", username);
-				String creditDTF = String.format("%06d", 0);
+				String creditDTF = String.format("%06d", credit);
 				inputBuffer.append(usernameDTF + " " + type + " "  + creditDTF + ".00\n");
 				inputBuffer.append("END                000000.00\n");
 				this.writeToDTF("01 " + usernameDTF + " " + type + " " + creditDTF + ".00 \n");

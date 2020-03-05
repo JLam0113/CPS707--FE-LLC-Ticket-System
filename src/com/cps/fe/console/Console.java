@@ -74,7 +74,9 @@ public class Console {
 				String username2 = sc.nextLine();
 				System.out.println("Please enter the account type:");
 				String type = sc.nextLine();
-				user1.createAccount(username2, type);
+				System.out.println("Please enter the initial credit amount:");
+				int credit = sc.nextInt();
+				user1.createAccount(username2, type, credit);
 			}
 			if(next.equals("delete")) {
 				System.out.println("Delete account selected, please enter the username:");
