@@ -4,5 +4,5 @@ Privileged Login successful, now logged in as admin, please enter a command
 Create account selected, please enter the username:
 Please enter the account type:
 Please enter the amount of credit:
-Invalid credit (exceeds 999,999). Please enter a command.
+Transaction unsuccessful (credit exceeded $999,999 or was less than 0), please enter a command.
 Session ended

@@ -23,6 +23,8 @@ public class Tickets {
 	private User user;
 	private int ticCount = 0;
 	private boolean soldItemThisSession;
+	private String eventSoldThisSession;
+	private String userSoldThisSession;
 	private Scanner consoleScanner;
 	private static String url = "tickets.txt";
 	private static String url2 = "accounts.txt";
@@ -35,7 +37,8 @@ public class Tickets {
 		this.user = user;
 		this.consoleScanner = consoleScanner;
 
-		soldItemThisSession = false;
+		eventSoldThisSession = "";
+		userSoldThisSession = "";
         url = ticketsPath;
         url2 = accountsPath;
 	}
@@ -62,6 +65,62 @@ public class Tickets {
 	
 			// check for validity of purchase amount
 			if (user.getUserType().equalsIgnoreCase("SS"))
+			System.out.println("Invalid number of tickets, please enter a command.");
+			return;
+		}
+		
+		if (this.userSoldThisSession.equals(sellersUsername) || this.eventSoldThisSession.equals(eventTitle)) {
+			System.out.println("Invalid transaction (ticket was sold this session), please enter a command.");
+			return;
+		}
+
+		//Get path for tickets.txt
+		try {
+			//Get the local path for accounts.txt
+
+			File file = new File(url);
+			Scanner sc = new Scanner(file);
+
+			String seller = "";
+
+			boolean curFoundEvent = false;
+			boolean curFoundUser = false;
+
+			while (sc.hasNextLine()) {
+				curLine = sc.nextLine();
+				String evtName = curLine.substring(0,20).trim();
+				seller = curLine.substring(20,34).trim();
+				lineIndex++;
+
+				if (evtName.equalsIgnoreCase(eventTitle))
+				{
+					foundEvent = true;
+					curFoundEvent = true;
+				}
+
+				if (seller.equalsIgnoreCase(sellersUsername))
+				{
+					foundSeller = true;
+					curFoundUser = true;
+				}
+
+				if (curFoundEvent && curFoundUser)
+				{
+					break;
+				}
+
+				curFoundEvent = false;
+				curFoundUser = false;
+			}
+
+			if (!foundEvent)
+			{
+				System.out.println("Event not found, please enter a command.");
+				sc.close();
+				return;
+			}
+
+			if (!foundSeller)
 			{
 				System.out.println("Invalid command (account not privileged), please enter a command.");
 				return;
@@ -210,26 +269,16 @@ public class Tickets {
 			System.out.println("Invalid number of tickets (max 100), please enter a command.");
 			return;
 		}
-
-		if (!soldItemThisSession)
-		{
 			System.out.println(numOfTickets + " tickets have been sold at $"+sellPrice+" to "+eventTitle+", please enter a command.");
 
 			try {
 				addNewTicket(eventTitle, user.getUser(), String.valueOf(numOfTickets), String.valueOf(sellPrice));
 				writeToDTF("03 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + sellPrice + " \n");
-				soldItemThisSession = true;
+				eventSoldThisSession = eventTitle;
+				userSoldThisSession = user.getUser();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-		}
-		else
-		{
-			System.out.println("Invalid command (please start a new session to sell tickets), please enter a command.");
-			return;
-		}
-
 	}
 	
 	/*
