@@ -171,8 +171,11 @@ public class Tickets {
 				System.out.println("Transaction confirmed, please enter a command.");
 				ticCount += numOfTickets;
 				sc.close();
-	
-				writeToDTF("04 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + price + " \n");
+				String eventDTF = String.format("%-15s", eventTitle);
+				String buyer2DTF = String.format("%-15s", user.getUser());
+				String creditDTF = String.format("%03d", price);
+				String ticketDTF = String.format("%03d", numOfTickets);
+				writeToDTF("04 " + eventDTF + " " + buyer2DTF + " " + ticketDTF + " " + creditDTF + ".00\n");
 			}
 			catch (FileNotFoundException e) {
 				System.out.println(e);
@@ -218,7 +221,11 @@ public class Tickets {
 
 			try {
 				addNewTicket(eventTitle, user.getUser(), String.valueOf(numOfTickets), String.valueOf(sellPrice));
-				writeToDTF("03 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + sellPrice + " \n");
+				String eventDTF = String.format("%-15s", eventTitle);
+				String seller2DTF = String.format("%-15s", user.getUser());
+				String creditDTF = String.format("%03d", sellPrice);
+				String ticketDTF = String.format("%03d", numOfTickets);
+				writeToDTF("03 " + eventDTF + " " + seller2DTF + " " + ticketDTF + " " + creditDTF + ".00\n");
 				eventSoldThisSession = eventTitle;
 				userSoldThisSession = user.getUser();
 			} catch (IOException e) {
@@ -236,9 +243,12 @@ public class Tickets {
 		User userBuyer = new User(buyer, url2);
 		User userSeller = new User(seller, url2);
 		if(userBuyer.exists() && userSeller.exists()) {
+		String buyerDTF = String.format("%-15s", buyer);
+		String seller2DTF = String.format("%-15s", seller);
+		String creditDTF = String.format("%06d", credit);
 		userBuyer.updateCredit(credit);
 		userSeller.updateCredit(credit * -1);
-		writeToDTF("05 " + buyer + " " + seller + " " + credit + "\n");
+		writeToDTF("05 " + buyerDTF + " " + seller2DTF + " " + creditDTF + ".00\n");
 		}
 	}
 
