@@ -1,2 +1,8 @@
 Welcome, please enter a command.
 Please enter your username
+Privileged Login successful, now logged in as admin, please enter a command
+Create account selected, please enter the username:
+Please enter the account type:
+Please enter the initial credit amount:
+Transaction unsuccessful (credit exceeded $999,999 or was less than 0), please enter a command.
+Session ended

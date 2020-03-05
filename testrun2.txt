@@ -1,0 +1,539 @@
+(base) MTs-MacBook-Pro:CPS707--FE-LLC-Ticket-System mt$ ./testharness.sh
+========
+Running test cases
+========
+running unit test for addcredit
+running test addcredit1
+running test addcredit2
+running test addcredit3
+running test addcredit4
+running unit test for buy
+running test buy1
+Exception in thread "main" java.lang.NumberFormatException: For input string: "admin"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:658)
+        at java.base/java.lang.Integer.parseInt(Integer.java:776)
+        at com.cps.fe.console.Console.postLogin(Console.java:91)
+        at com.cps.fe.console.Console.main(Console.java:50)
+running test buy2
+Exception in thread "main" java.lang.NullPointerException
+        at com.cps.fe.console.Console.login(Console.java:159)
+        at com.cps.fe.console.Console.main(Console.java:48)
+running test buy3
+Exception in thread "main" java.lang.NumberFormatException: For input string: "admin"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:658)
+        at java.base/java.lang.Integer.parseInt(Integer.java:776)
+        at com.cps.fe.console.Console.postLogin(Console.java:91)
+        at com.cps.fe.console.Console.main(Console.java:50)
+running test buy4
+Exception in thread "main" java.lang.NumberFormatException: For input string: "admin"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:658)
+        at java.base/java.lang.Integer.parseInt(Integer.java:776)
+        at com.cps.fe.console.Console.postLogin(Console.java:91)
+        at com.cps.fe.console.Console.main(Console.java:50)
+running test buy5
+Exception in thread "main" java.lang.NumberFormatException: For input string: "user1"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:658)
+        at java.base/java.lang.Integer.parseInt(Integer.java:776)
+        at com.cps.fe.console.Console.postLogin(Console.java:91)
+        at com.cps.fe.console.Console.main(Console.java:50)
+running unit test for create
+running test create1
+running test create2
+running test create3
+running test create4
+running test create5
+running unit test for delete
+running test delete1
+running test delete2
+Exception in thread "main" java.lang.NullPointerException
+        at com.cps.fe.console.Console.login(Console.java:159)
+        at com.cps.fe.console.Console.main(Console.java:48)
+running test delete3
+running test delete4
+running test delete5
+Exception in thread "main" java.lang.NumberFormatException: For input string: "user1"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:658)
+        at java.base/java.lang.Integer.parseInt(Integer.java:776)
+        at com.cps.fe.console.Console.postLogin(Console.java:91)
+        at com.cps.fe.console.Console.main(Console.java:50)
+running unit test for general
+running test general1
+running unit test for login
+running test login1
+running test login2
+running test login3
+Exception in thread "main" java.lang.NullPointerException
+        at com.cps.fe.console.Console.login(Console.java:159)
+        at com.cps.fe.console.Console.main(Console.java:48)
+running test login4
+running test login5
+running unit test for logout
+running test logout1
+running test logout2
+running test logout3
+running unit test for refund
+running test refund1
+running test refund2
+running test refund3
+running unit test for sell
+running test sell1
+running test sell2
+Exception in thread "main" java.lang.NullPointerException
+        at com.cps.fe.console.Console.login(Console.java:159)
+        at com.cps.fe.console.Console.main(Console.java:48)
+running test sell3
+running test sell4
+running test sell5
+running test sell6
+Exception in thread "main" java.lang.NumberFormatException: For input string: "admin"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:658)
+        at java.base/java.lang.Integer.parseInt(Integer.java:776)
+        at com.cps.fe.console.Console.postLogin(Console.java:91)
+        at com.cps.fe.console.Console.main(Console.java:50)
+========
+Test cases execution completed. Validating results
+========
+validating test addcredit1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+AddCredit selected, Please enter username:                      AddCredit selected, Please enter username:
+Please enter amount of credit:                                  Please enter amount of credit:
+Transaction successful, please enter a command.                 Transaction successful, please enter a command.
+Session ended                                                   Session ended
+addcredit PASSED
+validating test addcredit2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Non-privileged Login successful, now logged in as user1, plea   Non-privileged Login successful, now logged in as user1, plea
+AddCredit selected, Please enter username:                      AddCredit selected, Please enter username:
+Please enter amount of credit:                                  Please enter amount of credit:
+Transaction successful, please enter a command.                 Transaction successful, please enter a command.
+Session ended                                                   Session ended
+addcredit PASSED
+validating test addcredit3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+AddCredit selected, Please enter username:                      AddCredit selected, Please enter username:
+Please enter amount of credit:                                  Please enter amount of credit:
+Invalid username (user does not exist). Please enter a comman | Invalid username (user does not exist), please enter a comman
+Session ended                                                   Session ended
+addcredit FAILED!
+validating test addcredit4.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+AddCredit selected, Please enter username:                      AddCredit selected, Please enter username:
+Please enter amount of credit:                                  Please enter amount of credit:
+Transaction unsuccessful (credit exceeded $1,000 or was less    Transaction unsuccessful (credit exceeded $1,000 or was less
+Session ended                                                   Session ended
+addcredit PASSED
+validating accounts.txt addcredit
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999979.00                                  | user1           BS 999959.00
+END                000000.00                                    END                000000.00
+addcredit FAILED!
+validating tickets.txt addcredit
+event1              admin         2   10.00                   | event1              admin         1   10.00
+END                                                             END
+addcredit FAILED!
+validating test buy1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Buy tickets selected, please enter the event title:             Buy tickets selected, please enter the event title:
+Please enter the number of tickets:                             Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > You are buying 1 tickets for event1 from admin for $10, can y
+                                                              > Transaction confirmed, please enter a command
+                                                              > Session ended
+buy FAILED!
+validating test buy2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+                                                              > Non-privileged Login successful, now logged in as user2, plea
+                                                              > Buy tickets selected, please enter the event title:
+                                                              > Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > Invalid command (account not privileged), please enter a comm
+                                                              > Session ended
+buy FAILED!
+validating test buy3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Buy tickets selected, please enter the event title:             Buy tickets selected, please enter the event title:
+Please enter the number of tickets:                             Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > Invalid number of tickets, please enter a command.
+                                                              > Buy tickets selected, please enter the event title:
+                                                              > Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > Event not found, please enter a command.
+                                                              > Session ended
+buy FAILED!
+validating test buy4.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Non-privileged Login successful, now logged in as user1, plea   Non-privileged Login successful, now logged in as user1, plea
+Buy tickets selected, please enter the event title:             Buy tickets selected, please enter the event title:
+Please enter the number of tickets:                             Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > You are buying 1 tickets for event1 from admin for $10, can y
+                                                              > Transaction confirmed, please enter a command
+                                                              > Buy tickets selected, please enter the event title:
+                                                              > Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > Transaction cancelled (user is not privileged to buy anymore
+                                                              > Session ended
+buy FAILED!
+validating test buy5.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Buy tickets selected, please enter the event title:             Buy tickets selected, please enter the event title:
+Please enter the number of tickets:                             Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > You are buying 1 tickets for event1 from user1 for $10, can y
+                                                              > Transaction confirmed, please enter a command
+                                                              > Buy tickets selected, please enter the event title:
+                                                              > Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > You are buying 1 tickets for event1 from user1 for $10, can y
+                                                              > Transaction confirmed, please enter a command
+                                                              > Session ended
+buy FAILED!
+validating accounts.txt buy
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999959.00                                    user1           BS 999959.00
+END                000000.00                                    END                000000.00
+buy PASSED
+validating tickets.txt buy
+event1              admin         2   10.00                   | event1              admin         1   10.00
+END                                                             END
+buy FAILED!
+validating test create1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Create account selected, please enter the username:             Create account selected, please enter the username:
+Please enter the account type:                                  Please enter the account type:
+Please enter the initial credit amount:                       | Please enter the amount of credit:
+Transaction successful, please enter a command.                 Transaction successful, please enter a command.
+Session ended                                                   Session ended
+create FAILED!
+validating test create2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Non-privileged Login successful, now logged in as user1, plea | Privileged Login successful, now logged in as user1, please e
+Create account selected, please enter the username:             Create account selected, please enter the username:
+Please enter the account type:                                  Please enter the account type:
+Please enter the initial credit amount:                       | Please enter the amount of credit:
+You are not authorized to do that. please enter a command       You are not authorized to do that. please enter a command
+Session ended                                                   Session ended
+create FAILED!
+validating test create3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Create account selected, please enter the username:             Create account selected, please enter the username:
+Please enter the account type:                                  Please enter the account type:
+Please enter the initial credit amount:                       | Please enter the amount of credit:
+Username is too long (max 15), please enter a command           Username is too long (max 15), please enter a command
+Session ended                                                   Session ended
+create FAILED!
+validating test create4.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Create account selected, please enter the username:             Create account selected, please enter the username:
+Please enter the account type:                                  Please enter the account type:
+Please enter the initial credit amount:                       | Please enter the amount of credit:
+Invalid username (username already taken). Please enter a com   Invalid username (username already taken). Please enter a com
+Session ended                                                   Session ended
+create FAILED!
+validating test create5.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Create account selected, please enter the username:             Create account selected, please enter the username:
+Please enter the account type:                                  Please enter the account type:
+Please enter the initial credit amount:                       | Please enter the amount of credit:
+Transaction unsuccessful (credit exceeded $999,999 or was les   Transaction unsuccessful (credit exceeded $999,999 or was les
+Session ended                                                   Session ended
+create FAILED!
+validating accounts.txt create
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999959.00                                    user1           BS 999959.00
+user2           FS 000100.00                                  <
+END                000000.00                                    END                000000.00
+create FAILED!
+validating tickets.txt create
+event1              admin         2   10.00                   | event1              admin         1   10.00
+END                                                             END
+create FAILED!
+validating test delete1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Delete account selected, please enter the username:             Delete account selected, please enter the username:
+Transaction successful, please enter a command.                 Transaction successful, please enter a command.
+Session ended                                                   Session ended
+delete PASSED
+validating test delete2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+                                                              > Privileged Login successful, now logged in as admin, please e
+                                                              > Delete account selected, please enter the username:
+                                                              > Transaction cancelled (user is invalid), please enter a comma
+                                                              > Session ended
+delete FAILED!
+validating test delete3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Delete account selected, please enter the username:             Delete account selected, please enter the username:
+Invalid username (user does not exist). Please enter a comman   Invalid username (user does not exist). Please enter a comman
+Session ended                                                   Session ended
+delete PASSED
+validating test delete4.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Delete account selected, please enter the username:             Delete account selected, please enter the username:
+Invalid username (user is current user). Please enter a comma   Invalid username (user is current user). Please enter a comma
+Session ended                                                   Session ended
+delete PASSED
+validating test delete5.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Delete account selected, please enter the username:             Delete account selected, please enter the username:
+Invalid username (user does not exist). Please enter a comman | Transaction successful, please enter a command.
+Buy tickets selected, please enter the event title:             Buy tickets selected, please enter the event title:
+Please enter the number of tickets:                             Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > Invalid username, please enter a command.
+                                                              > Session ended
+delete FAILED!
+validating accounts.txt delete
+admin           AA 001040.00                                    admin           AA 001040.00
+                                                              > user1           BS 999959.00
+END                000000.00                                    END                000000.00
+delete FAILED!
+validating tickets.txt delete
+event1              admin         1   10.00                     event1              admin         1   10.00
+END                                                             END
+delete PASSED
+validating test general1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+AddCredit selected, Please enter username:                      AddCredit selected, Please enter username:
+Please enter amount of credit:                                  Please enter amount of credit:
+Transaction unsuccessful (credit exceeded $1,000 or was less  | Transaction unsuccessful (invalid input for price), please en
+Session ended                                                   Session ended
+general FAILED!
+validating accounts.txt general
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999959.00                                    user1           BS 999959.00
+END                000000.00                                    END                000000.00
+general PASSED
+validating tickets.txt general
+event1              admin         1   10.00                     event1              admin         1   10.00
+event1              user1         1   10.00                   <
+END                                                             END
+general FAILED!
+validating test login1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Session ended                                                   Session ended
+login PASSED
+validating test login2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Non-privileged Login successful, now logged in as user1, plea   Non-privileged Login successful, now logged in as user1, plea
+Session ended                                                   Session ended
+login PASSED
+validating test login3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+                                                              > Login unsuccessful (user not found). Please enter your userna
+                                                              > Session ended
+login FAILED!
+validating test login4.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Non-privileged Login successful, now logged in as user1, plea   Non-privileged Login successful, now logged in as user1, plea
+Invalid command (cannot login while logged in), please enter    Invalid command (cannot login while logged in), please enter
+Session ended                                                   Session ended
+login PASSED
+validating test login5.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Invalid command (must be logged in first). Please try again.    Invalid command (must be logged in first). Please try again.
+Session ended                                                   Session ended
+login PASSED
+validating accounts.txt login
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999959.00                                    user1           BS 999959.00
+END                000000.00                                    END                000000.00
+login PASSED
+validating tickets.txt login
+event1              admin         1   10.00                     event1              admin         1   10.00
+event1              user1         1   10.00                   <
+END                                                             END
+login FAILED!
+validating test logout1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+You're now logged out, please enter a command                   You're now logged out, please enter a command
+Session ended                                                   Session ended
+logout PASSED
+validating test logout2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+You're now logged out, please enter a command                   You're now logged out, please enter a command
+Invalid command (must be logged in first). Please try again.    Invalid command (must be logged in first). Please try again.
+Session ended                                                   Session ended
+logout PASSED
+validating test logout3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+You're now logged out, please enter a command                 | Create account selected, please enter the username:
+Invalid command (must be logged in first). Please try again.  | Please enter the account type:
+                                                              > Transaction successful, please enter a command.
+Session ended                                                   Session ended
+logout FAILED!
+validating accounts.txt logout
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999959.00                                    user1           BS 999959.00
+END                000000.00                                    END                000000.00
+logout PASSED
+validating tickets.txt logout
+event1              admin         1   10.00                     event1              admin         1   10.00
+event1              user1         1   10.00                   <
+END                                                             END
+logout FAILED!
+validating test refund1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Refund selected, please enter the buyer's username:             Refund selected, please enter the buyer's username:
+Please enter the seller's username:                             Please enter the seller's username:
+user1 is the buyer, and admin is the seller, please enter the   user1 is the buyer, and admin is the seller, please enter the
+                                                              > Refund successful, please enter a command.
+Session ended                                                   Session ended
+refund FAILED!
+validating test refund2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Non-privileged Login successful, now logged in as user1, plea   Non-privileged Login successful, now logged in as user1, plea
+User is non privileged, please enter a command:               | User is non privileged, please enter a command
+Session ended                                                   Session ended
+refund FAILED!
+validating test refund3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Refund selected, please enter the buyer's username:             Refund selected, please enter the buyer's username:
+Please enter the seller's username:                             Please enter the seller's username:
+user100 is the buyer, and admin is the seller, please enter t | user1 is the buyer, and admin is the seller, please enter the
+                                                              > Invalid buyer or seller, please enter a command.
+Session ended                                                   Session ended
+refund FAILED!
+validating accounts.txt refund
+admin           AA 001020.00                                  | admin           AA 001040.00
+user1           BS 999969.00                                  | user1           BS 999959.00
+END                000000.00                                    END                000000.00
+refund FAILED!
+validating tickets.txt refund
+event1              admin         1   10.00                     event1              admin         1   10.00
+event1              user1         1   10.00                   <
+END                                                             END
+refund FAILED!
+validating test sell1.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Sell tickets selected, please enter an event:                   Sell tickets selected, please enter an event:
+event1 selected, please enter the price:                        event1 selected, please enter the price:
+Please enter the amount of tickets:                             Please enter the amount of tickets:
+2 tickets have been sold at $10.0 to event1, please enter a c | 2 tickets have been sold at $10 to event1, please enter a com
+Session ended                                                   Session ended
+sell FAILED!
+validating test sell2.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+                                                              > Non-privileged Login successful, now logged in as user2, plea
+                                                              > Sell tickets selected, please enter an event:
+                                                              > event1 selected, please enter the price:
+                                                              > Please enter the amount of tickets:
+                                                              > Invalid command (account not privileged), please enter a comm
+                                                              > Session ended
+sell FAILED!
+validating test sell3.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Sell tickets selected, please enter an event:                   Sell tickets selected, please enter an event:
+event1 selected, please enter the price:                        event1 selected, please enter the price:
+Please enter the amount of tickets:                             Please enter the amount of tickets:
+Invalid ticket price (max price is 999.99), please enter a co   Invalid ticket price (max price is 999.99), please enter a co
+Session ended                                                   Session ended
+sell PASSED
+validating test sell4.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Sell tickets selected, please enter an event:                   Sell tickets selected, please enter an event:
+event1234567891012345678901234 selected, please enter the pri | event1 selected, please enter the price:
+Please enter the amount of tickets:                             Please enter the amount of tickets:
+Invalid event title (too long), please enter a command.         Invalid event title (too long), please enter a command.
+Session ended                                                   Session ended
+sell FAILED!
+validating test sell5.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Sell tickets selected, please enter an event:                   Sell tickets selected, please enter an event:
+event1 selected, please enter the price:                        event1 selected, please enter the price:
+Please enter the amount of tickets:                             Please enter the amount of tickets:
+Invalid number of tickets (max 100), please enter a command.    Invalid number of tickets (max 100), please enter a command.
+Session ended                                                   Session ended
+sell PASSED
+validating test sell6.out
+Welcome, please enter a command.                                Welcome, please enter a command.
+Please enter your username                                      Please enter your username
+Privileged Login successful, now logged in as admin, please e   Privileged Login successful, now logged in as admin, please e
+Sell tickets selected, please enter an event:                   Sell tickets selected, please enter an event:
+event1 selected, please enter the price:                        event1 selected, please enter the price:
+Please enter the amount of tickets:                             Please enter the amount of tickets:
+2 tickets have been sold at $10.0 to event1, please enter a c | 2 tickets have been sold at $10 to event1, please enter a com
+Buy tickets selected, please enter the event title:             Buy tickets selected, please enter the event title:
+Please enter the number of tickets:                             Please enter the number of tickets:
+                                                              > Please enter the seller's username:
+                                                              > Invalid transaction (ticket was sold this session), please en
+                                                              > Session ended
+sell FAILED!
+validating accounts.txt sell
+admin           AA 001040.00                                    admin           AA 001040.00
+user1           BS 999959.00                                    user1           BS 999959.00
+END                000000.00                                    END                000000.00
+sell PASSED
+validating tickets.txt sell
+event1              admin         2   10.0                    | event1              admin         2   10.00
+event1              admin         2   10.0                    <
+END                                                             END
+sell FAILED!
+(base) MTs-MacBook-Pro:CPS707--FE-LLC-Ticket-System mt$

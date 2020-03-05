@@ -1,3 +1,3 @@
-admin AA 1000.00
-user1 BS 20.00
-user2 FS 100.00
+admin           AA 001040.00
+user1           BS 999959.00
+END                000000.00

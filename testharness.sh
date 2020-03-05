@@ -53,5 +53,5 @@ do
       echo "$n PASSED"
     else
       echo "$n FAILED!"
-    fi
+  fi
 done
