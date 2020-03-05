@@ -21,7 +21,8 @@ import com.cps.fe.user.User;
  */
 public class Tickets {
 	private User user;
-	private String soldItemThisSession;
+	private String eventSoldThisSession;
+	private String userSoldThisSession;
 	private Scanner consoleScanner;
 	private static String url = "tickets.txt";
 	private static String url2 = "accounts.txt";
@@ -34,7 +35,8 @@ public class Tickets {
 		this.user = user;
 		this.consoleScanner = consoleScanner;
 
-		soldItemThisSession = "";
+		eventSoldThisSession = "";
+		userSoldThisSession = "";
         url = ticketsPath;
         url2 = accountsPath;
 	}
@@ -68,7 +70,7 @@ public class Tickets {
 			return;
 		}
 		
-		if (this.soldItemThisSession.equals(eventTitle)) {
+		if (this.userSoldThisSession.equals(sellersUsername) || this.eventSoldThisSession.equals(eventTitle)) {
 			System.out.println("Invalid transaction (ticket was sold this session), please enter a command.");
 			return;
 		}
@@ -213,7 +215,8 @@ public class Tickets {
 			try {
 				addNewTicket(eventTitle, user.getUser(), String.valueOf(numOfTickets), String.valueOf(sellPrice));
 				writeToDTF("03 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + sellPrice + " \n");
-				soldItemThisSession = eventTitle;
+				eventSoldThisSession = eventTitle;
+				userSoldThisSession = user.getUser();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
