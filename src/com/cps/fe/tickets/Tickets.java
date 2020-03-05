@@ -28,6 +28,11 @@ public class Tickets {
 	private Scanner consoleScanner;
 	private static String url = "tickets.txt";
 	private static String url2 = "accounts.txt";
+	private boolean foundEvent = false;
+	private boolean foundSeller = false;
+
+	private String curLine = "";
+	private int lineIndex = 0;
 
 	/*
 	 * Initial constructor
@@ -54,26 +59,20 @@ public class Tickets {
 		if(this.user.getUserType() != "AA" && ticCount >= 4)
 		{
 			System.out.println("Only 4 tickets can be purhcased per session. Please exit and return to purchase more, please enter a command.");
+			return;
 		}
-		else
+		else if (user.getUserType().equalsIgnoreCase("SS"))
 		{
-			boolean foundEvent = false;
-			boolean foundSeller = false;
-	
-			String curLine = "";
-			int lineIndex = 0;
 	
 			// check for validity of purchase amount
-			if (user.getUserType().equalsIgnoreCase("SS"))
 			System.out.println("Invalid number of tickets, please enter a command.");
 			return;
 		}
 		
-		if (this.userSoldThisSession.equals(sellersUsername) || this.eventSoldThisSession.equals(eventTitle)) {
+		else if (this.userSoldThisSession.equals(sellersUsername) || this.eventSoldThisSession.equals(eventTitle)) {
 			System.out.println("Invalid transaction (ticket was sold this session), please enter a command.");
 			return;
 		}
-
 		//Get path for tickets.txt
 		try {
 			//Get the local path for accounts.txt
@@ -134,59 +133,6 @@ public class Tickets {
 				return;
 			}
 	
-			//Get path for tickets.txt
-			try {
-				//Get the local path for accounts.txt
-	
-				File file = new File(url);
-				Scanner sc = new Scanner(file);
-	
-				String seller = "";
-	
-				boolean curFoundEvent = false;
-				boolean curFoundUser = false;
-	
-				while (sc.hasNextLine()) {
-					curLine = sc.nextLine();
-					String evtName = curLine.substring(0,20).trim();
-					seller = curLine.substring(20,34).trim();
-					lineIndex++;
-	
-					if (evtName.equalsIgnoreCase(eventTitle))
-					{
-						foundEvent = true;
-						curFoundEvent = true;
-					}
-	
-					if (seller.equalsIgnoreCase(sellersUsername))
-					{
-						foundSeller = true;
-						curFoundUser = true;
-					}
-	
-					if (curFoundEvent && curFoundUser)
-					{
-						break;
-					}
-	
-					curFoundEvent = false;
-					curFoundUser = false;
-				}
-	
-				if (!foundEvent)
-				{
-					System.out.println("Event not found, please enter a command.");
-					sc.close();
-					return;
-				}
-	
-				if (!foundSeller)
-				{
-					System.out.println("Invalid username, please enter a command.");
-					sc.close();
-					return;
-				}
-	
 				int qtyAvaliable = Integer.parseInt(curLine.substring(34,38).trim());
 				float price = Float.parseFloat(curLine.substring(38,44));
 	
@@ -235,7 +181,6 @@ public class Tickets {
 				System.out.println(e);
 			}
 		}
-	}
 
 	/*
 	 * This method is used when the sell command is entered.
