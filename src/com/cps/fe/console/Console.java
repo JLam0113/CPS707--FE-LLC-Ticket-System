@@ -157,6 +157,10 @@ public class Console {
 		User user1 = new User(username, accountsPath);
 		while (!user1.exists()) {
 			username = sc.nextLine();
+			if(username.equals("exit")) {
+				System.out.println("Session ended");
+				System.exit(0);
+			}
 			user1.setUser(username);
 		}
 		if(user1.getUserType().equals("AA"))

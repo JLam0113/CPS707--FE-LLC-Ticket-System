@@ -220,7 +220,7 @@ public class Tickets {
 	 * @param sellPrice Amount for each ticket.
 	 * @param numOfTickets Number of tickets being sold.
 	 */
-	public void sell(String eventTitle, float sellPrice, int numOfTickets)
+	public void sell(String eventTitle, int sellPrice, int numOfTickets)
 	{
 		// check for validity of purchase amount
 		if (user.getUserType().equalsIgnoreCase("BS"))
