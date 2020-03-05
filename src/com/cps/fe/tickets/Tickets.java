@@ -231,7 +231,7 @@ public class Tickets {
 	 * @param seller This is the seller who sold.
 	 * @param credit This is the amount of credits transaction.
 	 */
-	public void refund(String buyer, String seller, int credit) {
+	public void refund(String buyer, String seller, int credit) throws IOException {
 		User userBuyer = new User(buyer, url2);
 		User userSeller = new User(seller, url2);
 		if(userBuyer.exists() && userSeller.exists()) {

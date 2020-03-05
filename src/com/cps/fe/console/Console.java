@@ -22,14 +22,14 @@ import com.cps.fe.user.User;
  */
 public class Console {
 	private static Tickets tickets;
-	private static String accountsPath = "accounts.txt";
-	private static String ticketsPath = "tickets.txt";
+	private static String accountsPath = "resources/accounts.txt";
+	private static String ticketsPath = "resources/tickets.txt";
 
 	/*
 	 * This is the main method to handle the inputs.
 	 * @param args Unused.
 	 */
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 
 		// set the proper input mode
 		Scanner sc = new Scanner(System.in);
@@ -57,7 +57,7 @@ public class Console {
 	 * @param user1 This is the User that is logged in.
 	 * @param sc This is the scanner to read inputs.
 	 */
-	public static void postLogin(User user1, Scanner sc) {
+	public static void postLogin(User user1, Scanner sc) throws IOException {
 		String next = sc.nextLine();
 		while(!next.equals("logout")){
 			if(next.equals("login"))

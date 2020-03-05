@@ -1,2 +1,4 @@
-admin AA 1000.00
-user1 BS 20.00
+admin           AA 001000.00
+user1           BS 000020.00
+user2           BS 000100.00
+END                000000.00
