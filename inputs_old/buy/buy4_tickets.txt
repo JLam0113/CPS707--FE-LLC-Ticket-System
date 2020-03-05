@@ -1,2 +1,0 @@
-event1              admin         6   10.00 
-END                                         

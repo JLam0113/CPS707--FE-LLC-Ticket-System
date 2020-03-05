@@ -129,7 +129,9 @@ public class Console {
 	 * @param user1 This is the user that is logging out. 
 	 */
 	public static void logout(User user1) throws FileNotFoundException {
-		writeToDTF("00 " +  user1.getUser() + " " + user1.getUserType() + " " + user1.getCredit() + "\n");
+		String usernameDTF = String.format("%-15s", user1.getUser());
+		String creditDTF = String.format("%06d", user1.getCredit());
+		writeToDTF("00 " +  usernameDTF + " " + user1.getUserType() + " " + creditDTF + "\n");
 		System.out.println("You're now logged out, please enter a command");
 	}
 	
@@ -170,7 +172,7 @@ public class Console {
 	public static void writeToDTF(String msg) {
 
 			LocalDate localDate = LocalDate.now();
-			String date = new String("resources/DTF" + localDate + ".dtf");
+			String date = new String("resources/DTF-" + localDate + ".dtf");
 			/*
 			java.net.URL url = User.class.getClassLoader().getResource(date);
 			URL url2 = User.class.getClassLoader().getResource("resources/");

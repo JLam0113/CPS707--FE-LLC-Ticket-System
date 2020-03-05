@@ -1,2 +1,0 @@
-admin AA 1000.00
-user1 FS 60.00

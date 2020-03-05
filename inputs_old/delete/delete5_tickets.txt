@@ -1,3 +1,0 @@
-event1              admin         1   10.00 
-event1              user1         1   10.00
-END                                         
