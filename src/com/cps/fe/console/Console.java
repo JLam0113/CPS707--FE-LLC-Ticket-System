@@ -131,7 +131,7 @@ public class Console {
 	public static void logout(User user1) throws FileNotFoundException {
 		String usernameDTF = String.format("%-15s", user1.getUser());
 		String creditDTF = String.format("%06d", user1.getCredit());
-		writeToDTF("00 " +  usernameDTF + " " + user1.getUserType() + " " + creditDTF + "\n");
+		writeToDTF("00 " +  usernameDTF + " " + user1.getUserType() + " " + creditDTF + ".00\n");
 		System.out.println("You're now logged out, please enter a command");
 	}
 	
