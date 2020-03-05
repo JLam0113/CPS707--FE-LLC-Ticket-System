@@ -237,9 +237,9 @@ public class User {
 			System.out.println("Username is too long (max 15), please enter a command");
 			return;
 		}
-		if ((this.credit + credit) > 1000)
+		if (credit > 999999 || credit < 0)
 		{
-			System.out.println("Transaction unsuccessful, user credit cannot exceed $1,000, please enter a command.");
+			System.out.println("Transaction unsuccessful (credit exceeded $999,999 or was less than 0), please enter a command.");
 			return;
 		}
 		if (this.userType.equals("AA")) {
@@ -302,9 +302,9 @@ public class User {
 	 * @param credit Amount of credit to be added.
 	 */
 	public void addCredit(String user, int credit) throws IOException {
-		if ((this.credit + credit) > 1000)
+		if (credit > 1000 || credit < 0)
 		{
-			System.out.println("Transaction unsuccessful, user credit cannot exceed $1,000, please enter a command.");
+			System.out.println("Transaction unsuccessful (credit exceeded $1,000 or was less than 0), please enter a command.");
 			return;
 		}
 		if (user.equals(this.username)) {
@@ -373,6 +373,10 @@ public class User {
 	 * @param user User to be deleted.
 	 */
 	public void deleteAccount(String user, String ticketsPath) throws IOException {
+		if (this.username.equals(user)) {
+			System.out.println("Invalid username (user is current user). Please enter a command.");
+			return;
+		}
 		if (this.userType.equals("AA")) {
 			try 
 			{
@@ -405,8 +409,8 @@ public class User {
 				if(!userExists)
 				{
 					//An account with this name does not exist in account.txt
-					System.out.println("Invalid username (user does not exist). Session ended.");
-					System.exit(0);
+					System.out.println("Invalid username (user does not exist). Please enter a command.");
+					return;
 				}
 				else
 				{
@@ -446,7 +450,10 @@ public class User {
 			}	
 		}
 		else 
+		{
 			System.out.println("Transaction cancelled (user is invalid), please enter a command");
+			return;
+		}
 	}
 	
 	/*
