@@ -298,11 +298,18 @@ public class User {
 	 */
 	public void addCredit(String user, int credit) throws IOException {
 		if (user.equals(this.username)) {
-			this.updateCredit(credit);
-			String usernameDTF = String.format("%-15s", this.username);
-			String creditDTF = String.format("%06d", credit);
-			this.writeToDTF("06 " + usernameDTF + " " + this.userType + " " + creditDTF + ".00\n");
-			System.out.println("Transaction successful, please enter a command.");
+			if ((this.credit + credit) > 999999)
+			{
+				System.out.println("Transaction unsuccessful, user credit cannot exceed 999,999, please enter a command.");
+			}
+			else
+			{
+				this.updateCredit(credit);
+				String usernameDTF = String.format("%-15s", this.username);
+				String creditDTF = String.format("%06d", credit);
+				this.writeToDTF("06 " + usernameDTF + " " + this.userType + " " + creditDTF + ".00\n");
+				System.out.println("Transaction successful, please enter a command.");
+			}
 		}
 		else if (this.userType.equals("AA")) {
 			try 
@@ -339,11 +346,18 @@ public class User {
 				{
 					//Update the users credit
 					User user2 = new User(user,url);
-					user2.updateCredit(credit);	
-					String usernameDTF = String.format("%-15s", user2.username);
-					String creditDTF = String.format("%06d", credit);
-					this.writeToDTF("06 " + usernameDTF + " " + user2.userType + " " + creditDTF + ".00 \n");
-					System.out.println("Transaction successful, please enter a command.");
+					if ((user2.getCredit() + credit) > 999999)
+					{
+						System.out.println("Transaction unsuccessful, user credit cannot exceed 999,999, please enter a command.");
+					}
+					else
+					{
+						user2.updateCredit(credit);	
+						String usernameDTF = String.format("%-15s", user2.username);
+						String creditDTF = String.format("%06d", credit);
+						this.writeToDTF("06 " + usernameDTF + " " + user2.userType + " " + creditDTF + ".00 \n");
+						System.out.println("Transaction successful, please enter a command.");
+					}
 				}
 			}
 			catch (FileNotFoundException e) 
@@ -356,11 +370,18 @@ public class User {
 			if(user2.userType.equals("AA"))
 				System.out.println("Transaction cancelled (user is invalid), please enter a command");
 			else {
-				user2.updateCredit(credit);
-				String usernameDTF = String.format("%-15s", user2.username);
-				String creditDTF = String.format("%06d", credit);
-				this.writeToDTF("06 " + usernameDTF + " " + user2.userType + " " + creditDTF + ".00 \n");
-				System.out.println("Transaction successful, please enter a command.");
+				if ((user2.getCredit() + credit) > 999999)
+				{
+					System.out.println("Transaction unsuccessful, user credit cannot exceed 999,999, please enter a command:");
+				}
+				else
+				{
+					user2.updateCredit(credit);
+					String usernameDTF = String.format("%-15s", user2.username);
+					String creditDTF = String.format("%06d", credit);
+					this.writeToDTF("06 " + usernameDTF + " " + user2.userType + " " + creditDTF + ".00 \n");
+					System.out.println("Transaction successful, please enter a command.");
+				}
 			}
 		}
 		else 
