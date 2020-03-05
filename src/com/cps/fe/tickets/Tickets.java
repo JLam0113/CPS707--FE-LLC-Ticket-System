@@ -21,7 +21,7 @@ import com.cps.fe.user.User;
  */
 public class Tickets {
 	private User user;
-	private boolean soldItemThisSession;
+	private String soldItemThisSession;
 	private Scanner consoleScanner;
 	private static String url = "tickets.txt";
 	private static String url2 = "accounts.txt";
@@ -34,7 +34,7 @@ public class Tickets {
 		this.user = user;
 		this.consoleScanner = consoleScanner;
 
-		soldItemThisSession = false;
+		soldItemThisSession = "";
         url = ticketsPath;
         url2 = accountsPath;
 	}
@@ -65,6 +65,11 @@ public class Tickets {
 		if (numOfTickets > 4)
 		{
 			System.out.println("Invalid number of tickets, please enter a command.");
+			return;
+		}
+		
+		if (this.soldItemThisSession.equals(eventTitle)) {
+			System.out.println("Invalid transaction (ticket was sold this session), please enter a command.");
 			return;
 		}
 
@@ -203,26 +208,15 @@ public class Tickets {
 			System.out.println("Invalid number of tickets (max 100), please enter a command.");
 			return;
 		}
-
-		if (!soldItemThisSession)
-		{
 			System.out.println(numOfTickets + " tickets have been sold at $"+sellPrice+" to "+eventTitle+", please enter a command.");
 
 			try {
 				addNewTicket(eventTitle, user.getUser(), String.valueOf(numOfTickets), String.valueOf(sellPrice));
 				writeToDTF("03 " + eventTitle + " " + user.getUser() + " " + numOfTickets + " " + sellPrice + " \n");
-				soldItemThisSession = true;
+				soldItemThisSession = eventTitle;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-		}
-		else
-		{
-			System.out.println("Invalid command (please start a new session to sell tickets), please enter a command.");
-			return;
-		}
-
 	}
 	
 	/*
