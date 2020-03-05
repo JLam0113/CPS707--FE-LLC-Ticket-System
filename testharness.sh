@@ -3,6 +3,17 @@ echo "========"
 echo "Running test cases"
 echo "========"
 
+if [[ -d "input" ]]; then
+  rm -rf input
+fi
+cp -r "inputs_mastercopy" "inputs"
+
+lastDTF=$(ls resources/DTF*)
+
+if [[ -d $lastDTF ]]; then
+  mv $lastDTF resources/$(date +%s).dtf
+fi
+
 for n in $(ls inputs)
 do
     echo "running unit test for $n"
@@ -55,3 +66,13 @@ do
       echo "$n FAILED!"
   fi
 done
+
+echo "validating DTF $n"
+currentDTF=$(ls resources/DTF*)
+diff -y $currentDTF "expected/DTF.dtf"
+
+if [[ $? -eq 0 ]]; then
+    echo "$n PASSED"
+  else
+    echo "$n FAILED!"
+fi

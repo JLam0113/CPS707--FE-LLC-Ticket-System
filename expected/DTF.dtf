@@ -1,0 +1,12 @@
+06 user1           BS 000010.00 
+06 user1           BS 000010.00
+04 event1          admin           001 010.00
+04 event2          user1           004 010.00
+01 user2           FS 000100.00 
+02 user1           BS 999959.00
+00 admin           AA 001040.00
+00 admin           AA 001040.00
+00 admin           AA 001040.00
+05 user1           admin           000010.00
+03 event1          admin           002 010.00
+03 event1          admin           002 010.00
