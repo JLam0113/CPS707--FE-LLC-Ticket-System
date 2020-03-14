@@ -196,9 +196,9 @@ public class User {
 					//do nothing
 				}
 			}
-			FileOutputStream fos = new FileOutputStream(new File(url));
-			fos.write(inputBuffer.toString().getBytes());
-			fos.close();
+			//FileOutputStream fos = new FileOutputStream(new File(url));
+			//fos.write(inputBuffer.toString().getBytes());
+			//fos.close();
 			sc.close();
 	}
 	
@@ -229,9 +229,9 @@ public class User {
 			else
 				inputBuffer.append(temp +"\n");
 		}
-		FileOutputStream fos = new FileOutputStream(new File(url));
-		fos.write(inputBuffer.toString().getBytes());
-		fos.close();
+		//FileOutputStream fos = new FileOutputStream(new File(url));
+		//fos.write(inputBuffer.toString().getBytes());
+		//fos.close();
 		sc.close();
 	}
 	
@@ -290,9 +290,9 @@ public class User {
 				this.writeToDTF("01 " + usernameDTF + " " + type + " " + creditDTF + ".00 \n");
 				//this.writeToDTF("01 " + username + " " + type + " 0.00\n");
 				System.out.println("Transaction successful, please enter a command.");
-				FileOutputStream fos = new FileOutputStream(new File(url));
-				fos.write(inputBuffer.toString().getBytes());
-				fos.close();
+				//FileOutputStream fos = new FileOutputStream(new File(url));
+				//fos.write(inputBuffer.toString().getBytes());
+				//fos.close();
 				sc.close();
 			}
 			catch (FileNotFoundException e) 
@@ -438,9 +438,9 @@ public class User {
 							inputBuffer.append(temp +"\n");
 					}
 					
-					FileOutputStream fos = new FileOutputStream(new File(ticketsPath));
-					fos.write(inputBuffer.toString().getBytes());
-					fos.close();
+					//FileOutputStream fos = new FileOutputStream(new File(ticketsPath));
+					//fos.write(inputBuffer.toString().getBytes());
+					//fos.close();
 					sc2.close();
 					
 					//delete user

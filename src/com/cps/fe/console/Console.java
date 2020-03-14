@@ -14,6 +14,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import com.cps.fe.backend.Backend;
 import com.cps.fe.tickets.Tickets;
 import com.cps.fe.user.User;
 
@@ -47,7 +48,8 @@ public class Console {
 		while(true) {
 			User user1 = login(sc);
 			tickets = new Tickets(user1, sc, ticketsPath, accountsPath);
-			postLogin(user1, sc);
+			Backend be = new Backend(accountsPath);
+			postLogin(user1,be, sc);
 			logout(user1);
 		}
 	}
@@ -57,7 +59,7 @@ public class Console {
 	 * @param user1 This is the User that is logged in.
 	 * @param sc This is the scanner to read inputs.
 	 */
-	public static void postLogin(User user1, Scanner sc) throws IOException {
+	public static void postLogin(User user1,Backend be, Scanner sc) throws IOException {
 		String next = sc.nextLine();
 		while(!next.equals("logout")){
 			if(next.equals("login"))
@@ -121,6 +123,9 @@ public class Console {
 			if(next.equals("exit")) {
 				System.out.println("Session ended");
 				System.exit(0);
+			}
+			if(next.equals("update")) {
+				be.updateBackend();
 			}
 			next = sc.nextLine();
 		}
