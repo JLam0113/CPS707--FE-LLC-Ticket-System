@@ -321,9 +321,11 @@ public class Tickets {
 		}
 
 		// overwrite entire file
+		/*
 		FileOutputStream fos = new FileOutputStream(new File(url));
 		fos.write(inputBuffer.toString().getBytes());
 		fos.close();
+		*/
 	}
 
 	/*
@@ -362,9 +364,11 @@ public class Tickets {
 		inputBuffer.append('\n');
 
 		// overwrite entire file
+		/*
 		FileOutputStream fos = new FileOutputStream(new File(url));
 		fos.write(inputBuffer.toString().getBytes());
 		fos.close();
+		*/
 	}
 	
 	/*
