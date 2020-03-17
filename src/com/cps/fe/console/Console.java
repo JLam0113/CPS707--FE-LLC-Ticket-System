@@ -48,7 +48,7 @@ public class Console {
 		while(true) {
 			User user1 = login(sc);
 			tickets = new Tickets(user1, sc, ticketsPath, accountsPath);
-			Backend be = new Backend(accountsPath);
+			Backend be = new Backend(accountsPath,ticketsPath);
 			postLogin(user1,be, sc);
 			logout(user1);
 		}

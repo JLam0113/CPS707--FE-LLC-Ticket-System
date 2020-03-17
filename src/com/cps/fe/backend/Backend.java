@@ -12,9 +12,11 @@ import java.util.Scanner;
 public class Backend {
 	
 	private String url = "accounts.txt";
+	private String url2 = "tickets.txt";
 
-	public Backend(String accountsPath) {
+	public Backend(String accountsPath, String ticketsPath) {
 		url = accountsPath;
+		url2 = ticketsPath;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,14 +36,130 @@ public class Backend {
 			if(action.equals("03"))
 			{
 				//sell
+				BufferedReader tickFile = new BufferedReader(new FileReader(file));
+				StringBuffer inputBuffer = new StringBuffer();
+				String curLine = "";
+				
+				String eventName = temp.substring(4,18).trim();
+				String sellerName = temp.substring(19,34).trim();
+				String quantity = temp.substring(35,38).trim();
+				String price = temp.substring(39,45).trim();
+
+				// go to end
+				while ((curLine = tickFile.readLine()) != null) {
+
+					if (curLine.equals("END                                         "))
+						break;
+
+					inputBuffer.append(curLine);
+					inputBuffer.append('\n');
+				}
+
+				// update
+				String eventRes = String.format("%1$-19s", eventName);
+				String sellerRes = String.format("%1$-13s", sellerName);
+				String qtyRes = quantity;
+				String priceRes = price;
+
+				inputBuffer.append(eventRes + " " + sellerRes + " " + qtyRes + " " + priceRes);
+				inputBuffer.append('\n');
+
+				inputBuffer.append(curLine);
+				inputBuffer.append('\n');
+
+				// overwrite entire file
+				FileOutputStream fos = new FileOutputStream(new File(url2));
+				fos.write(inputBuffer.toString().getBytes());
+				fos.close();
+				tickFile.close();
+				return;
 			}
 			else if(action.equals("02"))
 			{
 				//buy
+				BufferedReader tickFile = new BufferedReader(new FileReader(file));
+				StringBuffer inputBuffer = new StringBuffer();
+				String curLine = "";
+				String evtName= "";
+				String seller= "";
+				String findEvtName = temp.substring(3,18).trim();
+				String findSeller = temp.substring(19,34).trim();
+				String updateQty = temp.substring(35,38).trim();
+				// go to line to update
+				while ((curLine = tickFile.readLine()) != null) {
+
+					evtName = curLine.substring(0,20).trim();
+					seller = curLine.substring(20,34).trim();
+
+					if (evtName.equalsIgnoreCase(findEvtName) && seller.equalsIgnoreCase(findSeller))
+						break;
+
+					inputBuffer.append(curLine);
+					inputBuffer.append('\n');
+				}
+
+				// update
+				String newQtyAvaliable = String.format("%1$-3s", updateQty);
+				inputBuffer.append(curLine.substring(0,34) + newQtyAvaliable + " " + curLine.substring(38));
+				inputBuffer.append('\n');
+
+				// write the rest of file
+				while ((curLine = tickFile.readLine()) != null) {
+
+					inputBuffer.append(curLine);
+					inputBuffer.append('\n');
+				}
+
+				// overwrite entire file
+				FileOutputStream fos = new FileOutputStream(new File(url));
+				fos.write(inputBuffer.toString().getBytes());
+				fos.close();
+				tickFile.close();
+				return;
 			}
 			else if(action.equals("05"))
 			{
 				//refund
+				BufferedReader tickFile = new BufferedReader(new FileReader(file));
+				StringBuffer inputBuffer = new StringBuffer();
+				String curLine = "";
+				String evtName= "";
+				String seller= "";
+				String findEvtName = temp.substring(3,18).trim();
+				String findSeller = temp.substring(19,34).trim();
+				String updateQty = temp.substring(35,38).trim();
+				// go to line to update
+				while ((curLine = tickFile.readLine()) != null) {
+
+					evtName = curLine.substring(0,20).trim();
+					seller = curLine.substring(20,34).trim();
+
+					if (evtName.equalsIgnoreCase(findEvtName) && seller.equalsIgnoreCase(findSeller))
+						break;
+
+					inputBuffer.append(curLine);
+					inputBuffer.append('\n');
+				}
+
+				// update
+				String newQtyAvaliable = String.format("%1$-3s", updateQty);
+				inputBuffer.append(curLine.substring(0,34) + newQtyAvaliable + " " + curLine.substring(38));
+				inputBuffer.append('\n');
+
+				// write the rest of file
+				while ((curLine = tickFile.readLine()) != null) {
+
+					inputBuffer.append(curLine);
+					inputBuffer.append('\n');
+				}
+
+				// overwrite entire file
+				FileOutputStream fos = new FileOutputStream(new File(url));
+				fos.write(inputBuffer.toString().getBytes());
+				fos.close();
+				tickFile.close();
+				return;
+				
 			}
 			//accounts file
 			//System.out.println("ACCOUNTS: " + temp + "\n");
@@ -91,6 +209,8 @@ public class Backend {
 				FileOutputStream fos = new FileOutputStream(new File(url));
 				fos.write(inputBuffer.toString().getBytes());
 				fos.close();
+				accSc.close();
+				return;
 				//inputBuffer.append("END                000000.00\n");
 				
 			}
@@ -124,6 +244,7 @@ public class Backend {
 				fos.write(inputBuffer.toString().getBytes());
 				fos.close();
 				accSc.close();
+				return;
 			}
 			else if(action.equals("06"))
 			{
@@ -166,7 +287,8 @@ public class Backend {
 				FileOutputStream fos = new FileOutputStream(new File(url));
 				fos.write(inputBuffer.toString().getBytes());
 				fos.close();
-				sc.close();
+				accSc.close();
+				return;
 			}
 		}
 		sc.close();
