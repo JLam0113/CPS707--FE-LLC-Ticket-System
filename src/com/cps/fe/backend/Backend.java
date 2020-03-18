@@ -198,7 +198,7 @@ public class Backend {
 						break;
 					}
 					else
-						inputBuffer.append(temp +"\n");
+						inputBuffer.append(accTemp +"\n");
 				}
 				String usernameDTF = String.format("%-15s", username);
 				//String creditDTF = String.format("%06s", credit);

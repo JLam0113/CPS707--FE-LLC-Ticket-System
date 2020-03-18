@@ -126,6 +126,7 @@ public class Console {
 			}
 			if(next.equals("update")) {
 				be.updateBackend();
+				System.out.println("Files updated, please enter a command");
 			}
 			next = sc.nextLine();
 		}
