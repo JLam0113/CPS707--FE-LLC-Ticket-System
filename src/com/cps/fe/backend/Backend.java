@@ -244,14 +244,14 @@ public class Backend {
 				Scanner accSc = new Scanner(accFile);
 				while (accSc.hasNextLine()) {
 					String accTemp = accSc.nextLine();
-					String curr_user = temp.substring(0,15);
+					String curr_user = accTemp.substring(0,15);
 					String curr_user2 = curr_user.trim();
 					if(curr_user2.equals(username))
 					{
 						//do nothing
 					}
 					else
-						inputBuffer.append(temp +"\n");
+						inputBuffer.append(accTemp +"\n");
 				}
 				FileOutputStream fos = new FileOutputStream(new File(url));
 				fos.write(inputBuffer.toString().getBytes());
