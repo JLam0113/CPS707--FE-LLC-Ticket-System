@@ -127,24 +127,27 @@ public class Backend {
 			else if(action.equals("05"))
 			{
 				//refund
-				BufferedReader tickFile = new BufferedReader(new FileReader(new File(url2)));
+				BufferedReader accFile = new BufferedReader(new FileReader(new File(url)));
 				StringBuffer inputBuffer = new StringBuffer();
 				String curLine = "";
 				String evtName= "";
 				String seller= "";
-				String findEvtName = temp.substring(3,18).trim();
+				//String findEvtName = temp.substring(3,18).trim();
 				String findSeller = temp.substring(19,34).trim();
 				//String updateQty = temp.substring(35,38).trim();
-				Float updateQty = Float.parseFloat(temp.substring(35,38).trim());
+				Float updateQty = Float.parseFloat(temp.substring(35,44).trim());
+				//System.out.println(updateQty + "\n");
 				Float qty = (float) 0;
 				// go to line to update
-				while ((curLine = tickFile.readLine()) != null) {
-
-					evtName = curLine.substring(0,20).trim();
-					seller = curLine.substring(20,34).trim();
-					qty = Float.parseFloat(curLine.substring(34,35).trim());
-
-					if (evtName.equalsIgnoreCase(findEvtName) && seller.equalsIgnoreCase(findSeller))
+				while ((curLine = accFile.readLine()) != null) {
+					if(curLine.trim().equals("END"))
+						break;
+					//evtName = curLine.substring(0,20).trim();
+					seller = curLine.substring(0,15).trim();
+					qty = Float.parseFloat(curLine.substring(19,28).trim());
+					//System.out.println(seller + "\n" + findSeller);
+					//if (evtName.equalsIgnoreCase(findEvtName) && seller.equalsIgnoreCase(findSeller))
+					if (seller.equalsIgnoreCase(findSeller))
 						break;
 
 					inputBuffer.append(curLine);
@@ -154,13 +157,14 @@ public class Backend {
 				// update
 				int qtyRes = Math.round(updateQty);
 				int qty_2 = Math.round(qty);
-				String newQtyRes = String.format("%1$-3s", qty_2+qtyRes);
+				int new_qty = qty_2+qtyRes;
+				String newQtyRes = String.format("%06d", new_qty);
 				String newQtyAvaliable = String.format("%1$-3s", updateQty);
-				inputBuffer.append(curLine.substring(0,34) + newQtyRes + " " + curLine.substring(38));
+				inputBuffer.append(curLine.substring(0,19) + newQtyRes + ".00");
 				inputBuffer.append('\n');
 
 				// write the rest of file
-				while ((curLine = tickFile.readLine()) != null) {
+				while ((curLine = accFile.readLine()) != null) {
 
 					inputBuffer.append(curLine);
 					inputBuffer.append('\n');
@@ -170,7 +174,7 @@ public class Backend {
 				FileOutputStream fos = new FileOutputStream(new File(url));
 				fos.write(inputBuffer.toString().getBytes());
 				fos.close();
-				tickFile.close();
+				accFile.close();
 				return;
 				
 			}
