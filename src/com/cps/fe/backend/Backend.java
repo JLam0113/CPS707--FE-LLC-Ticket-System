@@ -63,7 +63,7 @@ public class Backend {
 				String newQtyRes = String.format("%1$-3s", qtyRes);
 				int priceRes = Math.round(price);
 
-				inputBuffer.append(eventRes + " " + sellerRes + " " + newQtyRes + " " + priceRes + ".00");
+				inputBuffer.append(eventRes + " " + sellerRes + " " + newQtyRes + " " + priceRes + ".00 ");
 				inputBuffer.append('\n');
 
 				//inputBuffer.append(curLine);
