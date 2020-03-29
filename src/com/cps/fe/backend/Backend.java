@@ -269,17 +269,17 @@ public class Backend {
 				//update credits of user in accounts file
 				//System.out.println("test\n");
 				String username = temp.substring(3,18).trim();
-				String credit = temp.substring(22,31).trim();
+				Float credit = Float.parseFloat(temp.substring(22,31).trim());
 				//String  = creditTemp.replaceFirst("^0+(?!$)", "");
 				String type = temp.substring(19,21).trim();
-				int credit_i = Integer.parseInt(credit);
+				int credit_i = Math.round(credit);
 				//System.out.println(username + "\n");
 				BufferedReader accFile = new BufferedReader(new FileReader(new File(url)));
 				StringBuffer inputBuffer = new StringBuffer();
-				
+				String accTemp = "";
 				Scanner accSc = new Scanner(accFile);
-				while (accSc.hasNextLine()) {
-					String accTemp = sc.nextLine();
+				//while (accSc.hasNextLine()) {
+				while((accTemp = accFile.readLine()) != null) {
 					String[] temp2 = accTemp.split(" ");
 					String curr_user = accTemp.substring(0,15);
 					String curr_type = accTemp.substring(16,18);
@@ -297,7 +297,7 @@ public class Backend {
 					}
 					else
 					{
-						inputBuffer.append(temp +"\n");
+						inputBuffer.append(accTemp +"\n");
 						//do nothing
 					}
 				}
