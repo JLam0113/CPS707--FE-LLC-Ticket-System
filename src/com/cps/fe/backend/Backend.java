@@ -131,9 +131,9 @@ public class Backend {
 				StringBuffer inputBuffer = new StringBuffer();
 				String curLine = "";
 				String evtName= "";
-				String seller= "";
+				String buyer= "";
 				//String findEvtName = temp.substring(3,18).trim();
-				String findSeller = temp.substring(19,34).trim();
+				String findBuyer = temp.substring(3,18).trim();
 				//String updateQty = temp.substring(35,38).trim();
 				Float updateQty = Float.parseFloat(temp.substring(35,44).trim());
 				//System.out.println(updateQty + "\n");
@@ -143,11 +143,11 @@ public class Backend {
 					if(curLine.trim().equals("END"))
 						break;
 					//evtName = curLine.substring(0,20).trim();
-					seller = curLine.substring(0,15).trim();
+					buyer = curLine.substring(0,15).trim();
 					qty = Float.parseFloat(curLine.substring(19,28).trim());
 					//System.out.println(seller + "\n" + findSeller);
 					//if (evtName.equalsIgnoreCase(findEvtName) && seller.equalsIgnoreCase(findSeller))
-					if (seller.equalsIgnoreCase(findSeller))
+					if (buyer.equalsIgnoreCase(findBuyer))
 						break;
 
 					inputBuffer.append(curLine);
