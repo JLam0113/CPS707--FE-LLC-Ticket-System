@@ -157,7 +157,6 @@ class BackendTest {
 		assertTrue(true);
 	}
 	
-	// TODO bug:  proper padding at the end in actual code
 	@Test
 	void testStatementUpdateBackendCode03SellEvent() {
 		try {
@@ -217,20 +216,20 @@ class BackendTest {
 		
 		fail("cannot find expected ticket change");
 	}
-	
+
 	//TODO: fix empty string
 	@Test
 	void testStatementUpdateBackendCode05Refund() {
 		try {
 			// prepare
-			populateDTF("05 user2           admin           000 010.00");	
+			populateDTF("05 user2           admin           000010.00");	
 		
 			// verify
 			be.updateBackend();
 			
-			BufferedReader tickFile = new BufferedReader(new FileReader("resources/accounts.txt"));
+			BufferedReader accFile = new BufferedReader(new FileReader("resources/accounts.txt"));
 			String curLine = "";
-			while ((curLine = tickFile.readLine()) != null) 
+			while ((curLine = accFile.readLine()) != null) 
 			{
 				if (curLine.equals("END                                         "))
 					break;
@@ -249,7 +248,6 @@ class BackendTest {
 		fail("cannot find expected event change");
 	}
 	
-	// TODO: fix broken
 	@Test
 	void testStatementUpdateBackendCode06AddCredit() {
 		try {
