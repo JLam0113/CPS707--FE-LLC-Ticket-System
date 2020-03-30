@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +21,6 @@ class BackendTest {
 
 	private static String accounts = "";
 	private static String tickets = "";
-	
 	private Backend be;
 	
 	@BeforeEach
@@ -42,6 +42,48 @@ class BackendTest {
 		be = null;
 	}
 
+	@Test
+	void testInputValidation() {
+		String fail = new String("03 event9          admin           002 -010.00");
+		String correct = new String("03 event9          admin           002 010.00");
+		boolean res = be.validateInput(fail);
+		assertEquals(false, res);
+		res = be.validateInput(correct);
+		assertEquals(true, res);
+	}
+	
+	@Test
+	void testError() {
+		String error = new String(be.error(0));
+		assertEquals("", error);
+		String error2 = new String(be.error(1));
+		assertEquals("", error2);
+		String error3 = new String(be.error(3));
+		assertEquals("Incorrect error code entered", error3);
+	}
+	
+	@Test
+	void testFileValidation() {
+		try {
+			File file = new File("resources/tickets.txt");
+			boolean res = new Boolean(be.validateTickets(file));
+			assertEquals(true,res);
+			File file2 = new File("resources/accounts.txt");
+			res = be.validateAccounts(file2);
+			assertEquals(true,res);
+			File file3 = new File("resources/accounts2.txt");
+			res = be.validateAccounts(file3);
+			assertEquals(false,res);
+			File file4 = new File("resources/tickets2.txt");
+			res = be.validateTickets(file4);
+			assertEquals(false,res);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	@Test
 	void testStatementUpdateBackendCode00Logout() {
 		try {

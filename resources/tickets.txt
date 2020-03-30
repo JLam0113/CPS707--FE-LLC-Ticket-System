@@ -1,4 +1,4 @@
 event1              admin         1   10.00 
-event2              admin         3   15.00
+event2              admin         3   15.00 
 event3              admin         3   20.0  
 END                                         

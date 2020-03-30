@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Backend {
@@ -19,7 +20,66 @@ public class Backend {
 		url2 = ticketsPath;
 		// TODO Auto-generated constructor stub
 	}
+	
+	public boolean validateInput(String input) {
+		for (int i =0; i< input.length();i++) {
+			char c = input.charAt(i);
+			if(c == '-') {
+				if (error(0).equals(""))
+						return false;
+			}
+		}
+		return true;
+	}
+	
+	public String error(int errorCode) {
+		if(errorCode == 0) {
+			System.out.println("Fatal error found! Invalid input found in the daily transaction file, update cancelled");
+			return "";
+		}
+		else if (errorCode == 1) {
+			System.out.println("Fatal error found! Constraints have been violated, update cancelled");
+			return "";
+		}
+		return "Incorrect error code entered";
+	}
 
+	public boolean validateTickets(File file) throws FileNotFoundException {
+		Scanner sc = new Scanner(file);
+		while(sc.hasNextLine()) {
+			String temp = sc.nextLine();
+			for (int i =0; i< temp.length();i++) {
+				char c = temp.charAt(i);
+				if(c == '-') {
+					if (error(1).equals("")) {
+						sc.close();	
+						return false;
+					}
+				}
+			}
+		}
+		sc.close();
+		return true;
+	}
+	
+	public boolean validateAccounts(File file) throws FileNotFoundException {
+		Scanner sc = new Scanner(file);
+		ArrayList<String> users = new ArrayList<String>();
+		while(sc.hasNextLine()) {
+			String temp = sc.nextLine();
+			String curr_user = temp.substring(0,15);
+			if(users.contains(curr_user)) {
+				if (error(1).equals("")) {
+					sc.close();
+					return false;
+				}
+			}
+			users.add(curr_user);
+		}
+		sc.close();
+		return true;
+	}
+	
 	public void updateBackend() throws IOException {
 		//find todays DTF
 		LocalDate localDate = LocalDate.now();
@@ -30,6 +90,8 @@ public class Backend {
 		while (sc.hasNextLine()) 
 		{
 			String temp = sc.nextLine();
+			boolean res = validateInput(temp);
+			if(res == false)break;
 			String action = temp.substring(0,2);
 			//tickets file
 			//System.out.println("TICKETS: " + temp + "\n");
